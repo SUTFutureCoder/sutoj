@@ -1,0 +1,172 @@
+﻿@charset "utf-8";
+/* CSS Document */
+
+
+.container ul
+{
+	list-style-type:none;
+	padding-top:30px;
+	padding-bottom:30px;
+}
+
+.container ul li
+{
+	float:left;
+	margin:auto 40px;
+}
+
+.container ul li img
+{
+	height:80px;
+	width:80px;
+}
+
+.container ul li div
+{
+	padding-top:1em;
+}
+
+.container ul li .box
+{
+	padding:10px;
+	border:3px #e9f5e9 solid;
+	position:relative;
+	background:#fff;
+}
+
+.container ul li .box:hover
+{
+	padding:10px;
+	border:3px #2d953c solid;
+	position:relative;
+	background:#fff;
+}
+.container ul li .cover
+{
+	width:120px;
+	height:40px;
+	background:rgba(233,245,233,0.6);
+	bottom:55px;
+	position:absolute;
+	text-align:right;
+	font:"Arial Black";
+	font-size:24px;
+	display:none;
+}
+
+a
+{
+	text-decoration:none;
+	font:"黑体";
+	text-align:center;
+	color:#666;
+	font-weight:bold;
+}
+
+a:visited
+{
+	color:#666;
+}
+
+body{
+	font-size:20px;
+	font-family:微软雅黑;
+	width:952px;
+	text-align:center;
+	margin-right: auto;
+	margin-left: auto;
+}
+input
+{
+	font-size:15px;
+	padding-right:30px;
+}
+.X{
+	float:right;
+	margin-top:20px;
+}
+.logo{
+	float:left;
+	height:40px;
+	width:198px;
+	margin-top:12px;
+	}
+.login{
+	width:359px;
+	height:135px;
+	float:right;
+	background-color:#e9f5e9;
+	border-bottom-right-radius:6px;
+	border-top-right-radius:6px;
+	}
+.register{
+	height:135px;
+	width:588px;
+	float:left;
+	background-color:#e9f5e9;
+	border-bottom-left-radius:6px;
+	border-top-left-radius:6px;
+}
+.zhuce{
+	background-color:#2d953c;
+	color:#FFF;
+	font-size:18px;
+	border-radius:3px;
+	width:140px;
+	text-align:center;
+	margin-top:25px;
+	margin-left:55px;
+}
+.list{
+	background-color:#F8b553; 
+	width:90px; 
+	color:#FFF;
+	border-radius:20px;
+}
+.denglu{
+	width:82px;
+	height:28px;
+	background-color:#2d953c;
+	color:#FFF;
+	font-size:18px;
+	border-radius:3px;
+	margin-top:10px;
+	margin-left:50px;
+}
+.forget{
+	margin-top:-23px; 
+	margin-right:-200px; 
+	font-size:14px;
+}
+a.aaa:link {color:#000;}     /* 未访问的链接 */
+a.aaa:visited {color:#000;}  /* 已访问的链接 */
+a.aaa:hover {
+	background-color:#AF5F5F; color:#FFF;}    /* 当有鼠标悬停在链接上 */
+a.aaa:active {color:#000;}   /* 被选择的链接 */
+
+a.bbb:link {
+		background-color:#0094c6; 
+	width:150px; 
+	color:#FFF;
+	border-radius:20px;
+	} 
+a.bbb:visited {	
+	background-color:#0094c6; 
+	width:90px; 
+	color:#FFF;
+	border-radius:20px;} 
+a.bbb:hover {
+	background-color:#F8b553;
+	border-radius:20px;
+	width:150px; 
+	}    /* 当有鼠标悬停在链接上 */
+a.bbb:active {	
+	background-color:#0094c6; 
+	width:90px; 
+	color:#FFF;
+	border-radius:20px;}   /* 被选择的链接 */
+a.ccc:link {color:#000;}     /* 未访问的链接 */
+a.ccc:visited {color:#000;}  /* 已访问的链接 */
+a.ccc:hover {
+	background-color:#CC0; color:#FFF;}    /* 当有鼠标悬停在链接上 */
+a.ccc:active {color:#000;}   /* 被选择的

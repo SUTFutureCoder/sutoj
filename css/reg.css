@@ -1,0 +1,169 @@
+﻿
+#table_title
+{
+	margin-right: auto;
+	margin-left: auto;
+	height:10px;
+	margin-top:0px;
+	width:90%;
+}
+#table_title ul
+{
+	display:inline;
+	list-style:none;
+	border:0px;
+}
+#table_title li
+{
+	display:block;
+	margin-top:4px;
+	border:0px;
+	float:left;
+	color:#FFF;
+}
+#table_content
+{
+	margin-right: auto;
+	margin-left: auto;
+	margin-top:4px;
+
+	width:90%;
+	border-radius:5px;
+}
+#table_content img
+{
+	background-color:#e9f5e9;
+}
+.all_member
+{
+	height:35px;
+	
+	padding-bottom:10px;
+}
+.all_member div
+{
+	text-align:left;
+}
+.all_member input
+{
+	border:0px;
+	border-radius:3px;
+	background-color:#CCC;
+	height:30px;
+}
+
+#team_info
+{
+	width:100%;
+	margin-left:40px;
+}
+
+#team_info td
+{
+	margin-top:5px;
+}
+
+#team
+{
+	width:100%;
+}
+
+table
+{
+	border-radius:3px;	
+	position:relative;
+	left:-25px;
+
+}
+
+table input
+{
+	margin-left:5px;
+	border:0px;
+	border-radius:3px;
+	background-color:#CCC;
+	height:30px;
+	width:225px;	
+}
+.button
+{
+	width:100px;
+	height:35px;
+	font-family:'微软雅黑';
+	float:right;
+	margin:10px;
+}
+.button:hover
+{
+	background-color:#999;
+}
+#form
+{
+	margin-top:100px;
+}
+#footer
+{
+	clear:both;
+	width:600px;
+	text-align:left;
+	margin:auto;
+	font-size:80%;
+	padding:15px;
+}
+#team_tips
+{
+	margin-top:20px;
+	margin-right:10px;
+	float:right;
+}
+#send
+{
+	text-align:center;
+	background:#e9f5e9;
+	border-radius:5px;
+	position:absolute;
+	top:50%;
+	left:50%;
+	margin:-167px 0 0 -250px;
+	width:490px;
+	z-index:25;
+}
+#send h2
+{
+	padding:0px;
+	margin:23px;
+}
+#new
+{
+	margin-left:30px;
+	margin-top:38px;
+	margin-bottom:30px;
+	margin-right:15px;
+	border:0px;
+	padding:0px;
+}
+#normal
+{
+	margin-right:30px;
+	margin-top:38px;
+	margin-bottom:30px;
+	margin-left:15px;
+	border:0px;
+	padding:0px;
+}
+#send img
+{
+	opacity:0.8;
+	filter:alpha(opacity=70); /* IE6 */
+    -moz-opacity:0.8; /* Mozilla */
+    -khtml-opacity:0.8; /* Safari */
+}
+#send img:hover
+{
+	cursor:pointer;
+}
+#contianer
+{
+	display:none;
+}
+

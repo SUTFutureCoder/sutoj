@@ -1,0 +1,68 @@
+﻿/*
+* @date 2012-05-04
+*/
+a { text-decoration:none; color:#999; outline:none; }
+a:hover { text-decoration:underline; }
+.clearfix:after{content:" "; display:block; height:0; clear:both; visibility:hidden;}
+.clearfix{zoom:1;}
+/*.public*/
+/*head*/
+.head-warp { background:#fbfbfb url(../images/navBg.gif) repeat-x 0 bottom; margin-bottom:12px; top:10px; margin:0px auto;}
+.head-warp_back { background:#fbfbfb url(../images/navBg.gif) repeat-x 0 bottom;  position:absolute; top:30px;width:100%; left:0px;height:80px; z-index:-20;}
+.head-warp .head {width:980px; bottom:0px;  background-image:none; margin-left:auto;margin-right:auto; text-align:center; }
+h1  img{ position:relative;}
+
+
+.head { height:49px;  background:url(../images/line01.png) no-repeat 50% bottom; padding:14px 0 1px;}
+.head h1 { height:100%; width:10%; margin-left:-30px;float:left; line-height:10em; overflow:hidden; z-index:10;}
+.head h1 a { display:block; width:100%; height:42px;}
+.nav-box { float:right; position:relative; right:160px; text-align:center;}
+.nav-box ul { padding-top:8px;}
+.nav-box ul li { float:left; font-family:"微软雅黑"; font-size:25px; padding:0 20px; height:41px; line-height:41px;}
+.nav-box ul li a { color:#4b4b4b;}
+.nav-box ul li a:hover { text-decoration:none;}
+.nav-box ul li.last { font-family:"微软雅黑"; font-size:12px; padding-top:1px;}
+.nav-box ul li.last a { color:#a2a2a1;}
+.nav-box .nav-line { position:absolute; left:0; bottom:0; height:2px; line-height:2px; font-size:0; width:52px; background:#35c4fd;}
+
+
+
+.main { padding-top: 43px; }
+/* Fixed posistioning emulation for IE6
+     Star selector used to hide definition from browsers other than IE6
+     For valid CSS, use a conditional include instead */
+* html .jqmWindow {
+     position: absolute;
+     top: expression((document.documentElement.scrollTop || document.body.scrollTop) + Math.round(17 * (document.documentElement.offsetHeight || document.body.clientHeight) / 100) + 'px');
+}
+
+hr{
+	width:100%;
+	color:#66CCFF;
+	background-color:#66CCFF;
+	left:0px;
+}
+
+.find{
+	position:relative;
+	top:20px;
+	left:0px;
+}
+
+.margin{
+	position:relative;
+
+	left:-8px;
+	width:95%;
+	position:relative;
+	margin-bottom:23px;
+}
+
+body{
+	font-family:微软雅黑;
+}
+
+#result{
+	margin-bottom:20px;
+	position:absolute;
+}
