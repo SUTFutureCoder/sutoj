@@ -8,6 +8,7 @@ require("global_elem.php");
 require("include/cache_start.php");
 require("inc/en.php");
 require("include/const.inc.php");
+require("include/my_func.inc.php");
 ?>
 <meta http-equiv=”content-type” content=”text/html; charset=UTF-8″ />
 <meta http-equiv=”content-language” content=”zh-CN” />

@@ -1,4 +1,5 @@
 <script src="js/slide.js" type="text/javascript"></script>
+
 <script type="text/javascript">
 $(document).ready(
 	function()
@@ -179,8 +180,7 @@ $(document).ready(
 </div>
 
 <div>
-﻿﻿<div class="head-warp_back">
-</div>
+
 
    <!-- HEADER -->
 <div class="head-warp">

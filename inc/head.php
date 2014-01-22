@@ -13,7 +13,7 @@ require("include/my_func.inc.php");
 <meta http-equiv=”content-type” content=”text/html; charset=UTF-8″ />
 <meta http-equiv=”content-language” content=”zh-CN” />
 <meta name="description" content="<?php echo $domain_name;?>">
-<meta name="author" content="Lin_Star" >
+<meta name="author" content="Lin_*Chen" >
 <meta name="keywords" content="<?php echo $keywords;?>">
 <meta name="google-site-verification" content="gZWggbZzglzVcu2-IOfFzG67KurVCKkAtr0M0-9oc78" />
 

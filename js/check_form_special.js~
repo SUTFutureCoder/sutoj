@@ -227,11 +227,6 @@ function check(form)
 				
 	}
 
-
-}
-//验证学号是否已存在
-function check_number1(form)
-{
 	if(form.team_number1.value!="")
 	{
 		ajaxCallback = DisplayResults;
@@ -251,9 +246,7 @@ function check_number1(form)
 			}
 		}
 	}
-}
-function check_number2(form)
-{
+
 	if(form.team_number2.value!="")
 	{
 		ajaxCallback = DisplayResults;
@@ -273,9 +266,7 @@ function check_number2(form)
 			}
 		}
 	}
-}
-function check_number3(form)
-{
+	
 	if(form.team_number3.value!="")
 	{
 		ajaxCallback = DisplayResults;
@@ -296,6 +287,7 @@ function check_number3(form)
 		}
 	}
 }
+
 function show(name)
 {
 	$(name).slideDown('normal');

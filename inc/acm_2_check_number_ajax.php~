@@ -1,0 +1,18 @@
+<?php
+include "../include/db_info.inc.php"; 
+$sql = "SELECT team_number1 team_number2 team_number3 FROM users WHERE 
+(team_number1 = '$_GET[number]' OR team_number2 = '$_GET[number]' OR team_number3 = '$_GET[number]') ";
+$rezult = mysql_query($sql);
+if($rezult)
+{
+	$info = mysql_fetch_array ($rezult);
+	if($info)
+	{
+		echo '1';
+	}
+	else
+		echo '0';
+}
+else
+	echo '0';
+?>

@@ -1,6 +1,6 @@
 ﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 <?php
-include "include/db_info.inc.php";
+
 
 include "inc/header2.php";
 	
@@ -321,7 +321,6 @@ echo "</br></br></br></br>"
 
 
 
-<?php include("inc/footer.php");
-?>
+<?php include("inc/footer.php");?>
 
 
