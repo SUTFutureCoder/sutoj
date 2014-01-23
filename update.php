@@ -1,6 +1,6 @@
 ﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 <?php
-require "inc/head.php";
+
 include "inc/header2.php";
 ?>
 
@@ -183,8 +183,8 @@ if($result)
   	<tr align=\"center\">
   		<td  align=\"center\">队长</td>
 		
-    	<td height=50><input  name=\"team_number1\" type=\"text\" class=\"field\" value=\"$info1[team_number1]\"/></td>
-    	<td><input  name=\"team_member1\" type=\"text\" class=\"field\" value=\"$info1[team_member1]\"/></td>
+    	<td height=50><a style=\"color:black;text-decoration:none;\"/>" .$info1['team_number1'] ."</a></td>
+    	<td><a style=\"color:black;text-decoration:none;\"/>". $info1['team_member1']  ."</a></td>
   	</tr>";
 
 
