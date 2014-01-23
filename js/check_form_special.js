@@ -87,6 +87,19 @@ function check(form)
 		form.password.focus();
 		return false;
 	}
+	var reg = /^[0-9a-zA-Z]+$/;
+	var str = document.form.password.value;
+	if(!reg.test(str))
+	{
+		team_tips.innerHTML="请使用字母+数字密码";
+		if(document.form.hidden.value!="no")
+		{
+			member1_tips.innerHTML="";
+			number1_tips.innerHTML="";
+		}
+		form.password.focus();
+		return false;
+	}
 	if(document.form.password_2.value=="")
 	{
 		team_tips.innerHTML="确认密码不能为空";
@@ -232,69 +245,18 @@ function check(form)
 //验证学号是否已存在
 function check_number1(form)
 {
-	if(form.team_number1.value!="")
-	{
-		ajaxCallback = DisplayResults;
-		ajaxRequest('inc/acm_2_check_number_ajax.php?number='+form.team_number1.value);
-		function DisplayResults ()
-		{
-			//alert(ajaxreq.responseText);
-			if(ajaxreq.responseText=='1')
-			{
-				number1_tips.innerHTML="该学号已存在";
-				form.hidden.value="no";
-			}
-			else
-			{
-				number1_tips.innerHTML="";
-				form.hidden.value="yes";
-			}
-		}
-	}
+	var u = document.getElementById("num1").value;
+	getInfo(u);
 }
 function check_number2(form)
 {
-	if(form.team_number2.value!="")
-	{
-		ajaxCallback = DisplayResults;
-		ajaxRequest('inc/acm_2_check_number_ajax.php?number='+form.team_number2.value);
-		function DisplayResults ()
-		{
-			//alert(ajaxreq.responseText);
-			if(ajaxreq.responseText=='1')
-			{
-				number2_tips.innerHTML="该学号已存在";
-				form.hidden.value="no";
-			}
-			else
-			{
-				number2_tips.innerHTML="";
-				form.hidden.value="yes";
-			}
-		}
-	}
+	var u = document.getElementById("num2").value;
+	getInfo(u);
 }
 function check_number3(form)
 {
-	if(form.team_number3.value!="")
-	{
-		ajaxCallback = DisplayResults;
-		ajaxRequest('inc/acm_2_check_number_ajax.php?number='+form.team_number3.value);
-		function DisplayResults ()
-		{
-			//alert(ajaxreq.responseText);
-			if(ajaxreq.responseText=='1')
-			{
-				number3_tips.innerHTML="该学号已存在";
-				form.hidden.value="no";
-			}
-			else
-			{
-				number3_tips.innerHTML="";
-				form.hidden.value="yes";
-			}
-		}
-	}
+	var u = document.getElementById("num3").value;
+	getInfo(u);
 }
 function show(name)
 {

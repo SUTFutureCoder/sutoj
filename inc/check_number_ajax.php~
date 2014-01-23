@@ -1,0 +1,29 @@
+<?php/*
+include "../include/db_info.inc.php"; 
+$sql = "SELECT team_number1, team_number2, team_number3 FROM users WHERE (team_number1='$_GET[number]' OR team_number2 = '$_GET[number]' OR team_number3 = '$_GET[number]')";
+$rezult = mysql_query($sql);
+if($rezult)
+{
+	$info = mysql_fetch_array ($rezult);
+	if($info)	
+		echo '1';	
+	else
+		echo '0';
+}
+else
+	echo '0';*/
+?>
+<?php
+
+ if($_GET['num']){
+	include "../include/db_info.inc.php"; 
+	$sql="SELECT team_number1, team_number2, team_number3 FROM users WHERE team_number1='$_GET[num]' OR team_number2 = '$_GET[num]' OR team_number3 = '$_GET[num]'";
+	$query=mysql_query($sql);
+ 	if(is_array(mysql_fetch_row($query))){
+		echo "<font color='#FF0000'>用户名已经存在</font>";
+  	}else{
+  		echo "<font color='#00FF00'>可以使用</font>";
+  	}
+ }sleep(1);
+
+?>

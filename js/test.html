@@ -1,0 +1,25 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"> 
+<head> 
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> 
+<title>PHP+Ajax 异步通讯注册验证</title> 
+<script type="text/javascript" src="jquery-1.10.2.min.js"></script> <!--千万别忘记引用jQuery文件，否则无法执行--> 
+<script type="text/javascript"> 
+$(function(){ 
+//方式一 jQuery(普通应用时推荐，简单易用) 
+$("#user").blur(function(){ //文本框鼠标焦点消失事件 
+$.get("check_user.php?user="+$("#user").val(),null,function(data) //此处get方式 可换为post方式按需求调整，其他无需修改使用方式一样 
+{ 
+$("#chk").html(data); //向ID为chk的元素内添加html代码 
+}); 
+}) 
+
+}) 
+</script> 
+</head> 
+<body> 
+<form id="reg" action="" method="post"> 
+用户名：<input id="user" type="text" /> <span id="chk"></span> 
+</form> 
+</body> 
+</html> 

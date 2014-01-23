@@ -13,7 +13,7 @@ require("include/my_func.inc.php");
 <meta http-equiv=”content-type” content=”text/html; charset=UTF-8″ />
 <meta http-equiv=”content-language” content=”zh-CN” />
 <meta name="description" content="<?php echo $domain_name;?>">
-<meta name="author" content="Lin_Star" >
+<meta name="author" content="Lin_*Chen" >
 <meta name="keywords" content="<?php echo $keywords;?>">
 <meta name="google-site-verification" content="gZWggbZzglzVcu2-IOfFzG67KurVCKkAtr0M0-9oc78" />
 
@@ -31,7 +31,7 @@ require("include/my_func.inc.php");
  
 <link href="css/header.css" rel="stylesheet" charset="gb2312"/>
 
-<script language="javascript" type="text/javascript" src="include/ajax.js"></script>
+<script language="javascript" type="text/javascript" src="js/ajax.js"></script>
 
 <script type="text/javascript" src="js/check_form_special.js" ></script>
 <link rel="stylesheet" href="css/slide.css" type="text/css" media="screen" />

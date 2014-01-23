@@ -99,24 +99,24 @@ $(document).ready(
     </div>
     <div  id="team">
     	<div id="team_leader" class="all_member" style="padding-top:15px;">
-			<div style="float:left;width:10%; margin-top:12px; margin-right:5px; margin-left:-5px;;text-align:left;"><img id="add_img" src="images/add.png" width="16px" />&nbsp;&nbsp;队长:</div>
-            <div style="float:left;width:40%;"><input type="text" id="num1" class="field" name="team_number1" onblur="javascript:return check_number1(form)"/><font id="number1_tips"></font></div>
+			<div style="float:left;width:10%; margin-top:12px; margin-right:5px; margin-left:-5px;text-align:left;"><img id="add_img" src="images/add.png" width="16px" />&nbsp;&nbsp;队长:</div>
+            <div style="float:left;width:40%;"><input type="text" id="num1" class="field" name="team_number1" onblur="ajax(this.id, 1);"/><font id="number1_tips"></font></div>
             <div style="float:left;width:40%;"><input type="text" class="field" name="team_member1" /><font id="member1_tips"></font></div>
         </div>
         <div id="team_member1" class="all_member" style="display:none">
         	<div style="float:left;width:20%;text-align:center;"><img id="cancel_img1" src="images/cancel.png" width="16px" />&nbsp;&nbsp;队员:</div>
-            <div style="float:left;width:40%;"><input type="text" id="num2" class="field" name="team_number2"  onblur="check_number2(form)" /><font id="number2_tips"></font></div>
+            <div style="float:left;width:40%;"><input type="text" id="num2" class="field" name="team_number2"  onblur="ajax(this.id, 1);" /><font id="number2_tips"></font></div>
             <div style="float:left;width:40%;"><input type="text" class="field" name="team_member2" /></div>
         </div>
         <div id="team_member2"  class="all_member" style="display:none;">
         	<div style="float:left;width:20%;text-align:center;"><img id="cancel_img2" src="images/cancel.png" width="16px" />&nbsp;&nbsp;队员:</div>
-            <div style="float:left;width:40%;"><input type="text" id="num3" class="field" name="team_number3"  onblur="check_number3(form)" /><font id="number3_tips"></font></div>
+            <div style="float:left;width:40%;"><input type="text" id="num3" class="field" name="team_number3"  onblur="ajax(this.id, 1);" /><font id="number3_tips"></font></div>
             <div style="float:left;width:40%;"><input type="text" class="field" name="team_member3" /></div>
         </div>
     </div>
 </div>
 <div>
-	<a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a><input name="freshman_contest" type="radio" id="freshman_contest" value=1 checked />新生赛&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input name="freshman_contest" type="radio" id="freshman_contest" value=0 />校赛
+	<br><a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a><input name="freshman_contest" type="radio" id="freshman_contest" value=1 checked />新生赛&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input name="freshman_contest" type="radio" id="freshman_contest" value=0 />校赛
 </div>
 
 
@@ -124,7 +124,7 @@ $(document).ready(
 	<table cellpadding="5px">
     	<tr>
         	<td>队名:</td>
-            <td><input type="text" class="field"  name="team_name" /></td>
+            <td><input id="team_name" type="text" class="field"  name="team_name" onblur="ajax(this.id, 2);"/></td>
             <td>联系方式:</td>
             <td><input type="text" class="field"  name="team_telephone" /></td>
         </tr>
@@ -199,7 +199,7 @@ $(document).ready(
     </div>
   </div>
 </div><div class="marquee" ><marquee scrollamount="2" width=100% scrolldelay="40" onmouseover="javascript:this.stop();" onmouseout="javascript:this.start();"><b style="margin-right:20px"><br/>
-<a href="#" style="color:red"><?php
+<a href="#" style="color:red;z-index:-1;"><?php
 
 	$sql = "SELECT * FROM news WHERE 'defunct' != 'Y'";
 	$result = mysql_query($sql, $conn);
