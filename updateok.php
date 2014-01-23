@@ -41,10 +41,19 @@ if($_SERVER['REQUEST_METHOD']=='POST')
 
 	
 	}
+
+	if(!($_POST['team_name']))
+	{
+			echo "<br><br><br><br><center><h1 style=\"color:#F00; font-family:微软雅黑;\">修改失败 未输入队名</h1></center><br><br><br><br><br>";
+								echo "<br><br><input  value=\"确认\" class=\"button\" onclick=\"location='update.php'\"/><br><br><br><br><br>";
+			goto a;
+
+	
+	}
 								
-						$sql="SELECT count(*) FROM `users` WHERE team_number1 !='' AND (team_number1='$_POST[team_number1]' or team_number1='$_POST[team_number2]' or team_number1='$_POST[team_number3]')";//判断学号有没有被注册
-						$sql2="SELECT count(*) FROM `users` WHERE team_number2 !='' AND (team_number2='$_POST[team_number1]' or team_number2='$_POST[team_number2]' or team_number2='$_POST[team_number3]')";//判断学号有没有被注册
-						$sql3="SELECT count(*) FROM `users` WHERE team_number3 !='' AND (team_number3='$_POST[team_number1]' or team_number3='$_POST[team_number2]' or team_number3='$_POST[team_number3]')";//判断学号有没有被注册
+						$sql="SELECT count(*) FROM `users` WHERE team_number1 !='' AND (team_number1='$_POST[team_number2]' or team_number1='$_POST[team_number3]')";//判断学号有没有被注册
+						$sql2="SELECT count(*) FROM `users` WHERE team_number2 !='' AND (team_number2='$_POST[team_number2]' or team_number2='$_POST[team_number3]')";//判断学号有没有被注册
+						$sql3="SELECT count(*) FROM `users` WHERE team_number3 !='' AND (team_number3='$_POST[team_number2]' or team_number3='$_POST[team_number3]')";//判断学号有没有被注册
 						$sql4="SELECT count(*) FROM `users` WHERE nick !='' AND (nick='$_POST[team_name]')";//判断队伍名有没有被注册
 						
 						$result = mysql_query ($sql);
@@ -67,7 +76,7 @@ if($_SERVER['REQUEST_METHOD']=='POST')
 
 			$password = md5($_POST['password']);
 
-	$sql ="UPDATE users SET nick='$_POST[team_name]', team_number1 ='$_POST[team_number1]' , team_member1 = '$_POST[team_member1]', team_number2 = '$_POST[team_number2]', team_member2 = '$_POST[team_member2]', team_number3 = '$_POST[team_number3]', team_member3 = '$_POST[team_member3]', team_telephone = '$_POST[team_telephone]', password='$password' WHERE user_id = '$_SESSION[user_id]'";
+	$sql ="UPDATE users SET nick='$_POST[team_name]', team_number2 = '$_POST[team_number2]', team_member2 = '$_POST[team_member2]', team_number3 = '$_POST[team_number3]', team_member3 = '$_POST[team_member3]', team_telephone = '$_POST[team_telephone]', password='$password' WHERE user_id = '$_SESSION[user_id]'";
 	
 	$result = mysql_query($sql);
 	
