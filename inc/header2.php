@@ -5,7 +5,7 @@
 	<h1><img alt="" src="icon/apple-touch-icon.png" width="50" height="50" /></h1>
     <div class="nav-box">
       <ul>
-        <li class="cur"><a href="index.html">首页</a></li>
+        <li class="cur"><a href="index.php">首页</a></li>
         <li><a href="problemset.php">比赛题目</a></li>
         <li><a href="status.php" target="_blank">提交情况</a></li>
         <li><a href="contestrank.php">现场排名</a></li>

@@ -76,7 +76,7 @@ if($_SERVER['REQUEST_METHOD']=='POST')
 
 			$password = md5($_POST['password']);
 
-	$sql ="UPDATE users SET nick='$_POST[team_name]', team_number2 = '$_POST[team_number2]', team_member2 = '$_POST[team_member2]', team_number3 = '$_POST[team_number3]', team_member3 = '$_POST[team_member3]', team_telephone = '$_POST[team_telephone]', password='$password' WHERE user_id = '$_SESSION[user_id]'";
+	$sql ="UPDATE users SET nick='$_POST[team_name]', team_number2 = '$_POST[team_number2]', team_member2 = '$_POST[team_member2]', team_number3 = '$_POST[team_number3]', team_member3 = '$_POST[team_member3]', team_telephone = '$_POST[team_telephone]', password='$password' WHERE user_id = '". $_SESSION['U'] -> getU_id() ."'";
 	
 	$result = mysql_query($sql);
 	
@@ -85,7 +85,16 @@ if($_SERVER['REQUEST_METHOD']=='POST')
 	{
 		if($result)
 			{
+				$_SESSION['U'] -> setT_n2($_POST['team_number2']);
+				$_SESSION['U'] -> setT_m2($_POST['team_member2']);
+				$_SESSION['U'] -> setT_n3($_POST['team_number3']);
+				$_SESSION['U'] -> setT_m3($_POST['team_member3']);
+				$_SESSION['U'] -> setT_tel($_POST['team_telephone']);
+				$_SESSION['U'] -> setNic($_POST['team_name']);
+				
 				echo "<br><br><br><br><center><h1 style=\"color:red;\">修改成功</h1></center>";
+				
+				
 			}
 		else
 			echo "<br><br><br><br><center><h1 style=\"color:red;\">修改失败</h1></center>";

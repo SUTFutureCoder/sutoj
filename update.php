@@ -1,6 +1,5 @@
 ﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 <?php
-
 include "inc/header2.php";
 ?>
 
@@ -161,7 +160,7 @@ exit(0);
 					
 					
 
-$sql = "SELECT * FROM users WHERE user_id='$_SESSION[user_id]'";
+$sql = "SELECT * FROM users WHERE user_id='". $_SESSION['U'] -> getU_id() ."'";
 
 $result = mysql_query($sql);
 
@@ -183,16 +182,16 @@ if($result)
   	<tr align=\"center\">
   		<td  align=\"center\">队长</td>
 		
-    	<td height=50><a style=\"color:black;text-decoration:none;\"/>" .$info1['team_number1'] ."</a></td>
-    	<td><a style=\"color:black;text-decoration:none;\"/>". $info1['team_member1']  ."</a></td>
+    	<td height=50><a style=\"color:black;text-decoration:none;\"/>" . $_SESSION['U'] -> getT_n1() ."</a></td>
+    	<td><a style=\"color:black;text-decoration:none;\"/>". $_SESSION['U'] -> getT_m1()  ."</a></td>
   	</tr>";
 
 
 
 	echo "<tr align=\"center\">
     <td  align=\"center\">队员</td>
-    <td height=50><input  name=\"team_number2\" type=\"text\" class=\"field\" value=\"$info1[team_number2]\"/></td>
-    <td><input  name=\"team_member2\" type=\"text\" class=\"field\" value=\"$info1[team_member2]\"/></td>
+    <td height=50><input  name=\"team_number2\" type=\"text\" class=\"field\" value=\"".$_SESSION['U'] -> getT_n2()."\"/></td>
+    <td><input  name=\"team_member2\" type=\"text\" class=\"field\" value=\"".$_SESSION['U'] -> getT_m2()."\"/></td>
 	</tr> ";		
 
 
@@ -200,8 +199,8 @@ if($result)
 
 	echo " <tr align=\"center\">
     <td  align=\"center\">队员</td>
-    <td height=50><input  name=\"team_number3\" type=\"text\" class=\"field\" value=\"$info1[team_number3]\"/></td>
-    <td><input  name=\"team_member3\" type=\"text\" class=\"field\" value=\"$info1[team_member3]\"/></td>
+    <td height=50><input  name=\"team_number3\" type=\"text\" class=\"field\" value=\"".$_SESSION['U'] -> getT_n3()."\"/></td>
+    <td><input  name=\"team_member3\" type=\"text\" class=\"field\" value=\"".$_SESSION['U'] -> getT_m3()."\"/></td>
   </tr>
   ";
 
@@ -224,9 +223,9 @@ echo "
     	<td width=15% align=\"center\">队名</td>
         
 
-        <td width=35%><input  name=\"team_name\" id=\"team_name\" type=\"text\" class=\"field\"  value=\"$info1[nick]\"/></td>
+        <td width=35%><input  name=\"team_name\" id=\"team_name\" type=\"text\" class=\"field\"  value=\"".$_SESSION['U'] -> getNic()."\"/></td>
         <td width=15%><span style=\"float:right text-align=center\">联系方式</span></td>
-        <td width=35%><input  name=\"team_telephone\" type=\"text\" class=\"field\" value=\"$info1[team_telephone]\"/></td>
+        <td width=35%><input  name=\"team_telephone\" type=\"text\" class=\"field\" value=\"".$_SESSION['U'] -> getT_tel()."\"/></td>
     </tr>
 	 
 </table></center>";

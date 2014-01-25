@@ -5,17 +5,16 @@
 	</div> <!-- /login -->	
 <?php
 	@session_start ();
-	if(!isset($_SESSION['user_id']))
+	if(!isset($_SESSION['U']))
 	{
 		header("location:index.php");
 	}
-
 ?>
     <!-- The tab on top -->	
 	<div class="tab">
 		<ul class="login">
 	    	<li class="left">&nbsp;</li>
-	        <li>你好 <?php echo $_SESSION['user_id']; ?></li>
+	        <li>你好 <?php echo $_SESSION['U'] -> getU_id(); ?></li>
 			<li class="sep">|</li>
 			<li id="toggle">
 				<a id="open" href="update.php">修改信息 </a>|

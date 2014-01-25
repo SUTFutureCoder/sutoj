@@ -1,14 +1,14 @@
 <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 
 <?php 
-    require_once("../include/db_info.inc.php");
+    require("../include/db_info.inc.php");
+    require("../include/user.class.php");
 	$view_title= "LOGIN";
-
-	if (isset($_SESSION['user_id'])){
+	if (isset($_SESSION['U'])){
 	echo "<a href=logout.php>Please logout First!</a>";
 	exit(1);
 	}
-	require_once("../include/my_func.inc.php");
+	require("../include/my_func.inc.php");
 
 
 	
@@ -56,22 +56,13 @@
 	
 	if ($login)
     {
-		$_SESSION['user_id']=$login;
-		
-		$sql="SELECT `authorizee` FROM `users` WHERE `user_id`='".$user_id."'";
-		$result=mysql_query($sql);
-		$row = mysql_fetch_array($result);
-
-//		echo $row['authorizee'] ;
-		if($login == "admin")
-		{$_SESSION['administrator']=1;}	
-		if($row['authorizee'] == "Volunteer")
-		{$_SESSION['authorizee'] = "Volunteer";}
-		$sql="SELECT `freshman_contest` FROM `users` WHERE `user_id`='$user_id'";
-		$result=mysql_query($sql);
-		$row = mysql_fetch_array($result);		
-		echo $_SESSION['freshman_contest'] = $row['freshman_contest'];
-		
+    
+    	$sql = "SELECT * FROM `users` WHERE `user_id` =  '$login'";
+    	$result = mysql_query($sql);
+    	$row = mysql_fetch_array($result);
+    	    	
+    	$_SESSION['U'] = new User($row['team_id'], $row['user_id'], $row['team_number1'], $row['team_member1'], $row['team_number2'], $row['team_member2'], $row['team_number3'], $row['team_member3'], $row['team_telephone'], $row['freshman_contest'], $row['submit'], $row['solved'], $row['defunct'], $row['ip'], $row['accesstime'], $row['volume'], $row['language'], $row['reg_time'], $row['nick'], $row['authorizee']);    
+    	
 		echo mysql_error();
 		while ($result&&$row=mysql_fetch_assoc($result))
 			$_SESSION[$row['rightstr']]=true;

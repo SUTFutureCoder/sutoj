@@ -10,7 +10,7 @@
 <div>
 <?php
 @session_start ();
-if(isset($_SESSION['user_id']))
+if(isset($_SESSION['U']))
 	require "inc/header1.php";
 else
 	require "inc/header.php";

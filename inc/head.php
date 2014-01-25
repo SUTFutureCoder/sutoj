@@ -1,10 +1,10 @@
 ﻿<?php
 header("Content-Type: text/html; charset=utf-8");
-?>
-<?php
-@session_start(); 
+require("include/user.class.php");
+//@session_start(); 
 require("include/db_info.inc.php");
-require("global_elem.php");
+
+require("include/global_elem.php");
 require("include/cache_start.php");
 require("inc/en.php");
 require("include/const.inc.php");
@@ -12,9 +12,9 @@ require("include/my_func.inc.php");
 ?>
 <meta http-equiv=”content-type” content=”text/html; charset=UTF-8″ />
 <meta http-equiv=”content-language” content=”zh-CN” />
-<meta name="description" content="<?php echo $domain_name;?>">
+<meta name="description" content="<?php echo Global_elem::DOMAIN_NAME;?>">
 <meta name="author" content="Lin_*Chen" >
-<meta name="keywords" content="<?php echo $keywords;?>">
+<meta name="keywords" content="<?php echo Global_elem::KEYWORDS?>">
 <meta name="google-site-verification" content="gZWggbZzglzVcu2-IOfFzG67KurVCKkAtr0M0-9oc78" />
 
 

@@ -1,5 +1,4 @@
-<script src="js/jquery-1.4.2.min.js" type="text/javascript"></script>
-   <div id="content" style="margin: 0px auto;">   
+ <div id="content" style="margin: 0px auto;">   
    	<div class="carousel-box">
          <div class="box">
             <div class="border-right">
