@@ -145,7 +145,7 @@ $footer = "								   <div id=\"result\">
 </html>";
 
 	$occurtime = date("Y-m-d H:i:s");
-	$sql = "SELECT * FROM  `contest` WHERE  `contest_id` =4";
+	$sql = "SELECT * FROM  `contest` WHERE  `contest_id` =-1";
 	$result= mysql_query($sql);
 	$regstart=mysql_fetch_array($result);
 	//echo $conteststart['start_time'];

@@ -1,7 +1,5 @@
 <html>
 <head>
-
-
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<title><?php echo $view_title?></title>
 	<link rel=stylesheet href="css/sutoj.css" type="text/css">
@@ -18,13 +16,9 @@
                   <div class="left-top-corner">
                      <div class="right-top-corner">
                         <div class="inner">
-
 <br>
 
-
-<div id=main>
-	
-	
+<div id=main>	
 	
 <link href='extra/highlight/styles/shCore.css' rel='stylesheet' type='text/css'/> 
 <link href='extra/highlight/styles/shThemeDefault.css' rel='stylesheet' type='text/css'/> 
@@ -69,7 +63,7 @@ SyntaxHighlighter.all();
 	}
 
    if ($ok==true){
-		if($view_user_id!=$_SESSION['user_id'])
+		if($view_user_id!=$_SESSION['U'] -> getU_id())
 			echo "<a href='mail.php?to_user=$view_user_id&title=$MSG_SUBMIT $id'>Mail the auther</a>";
 		$brush=strtolower($language_name[$slanguage]);
 		if ($brush=='pascal') $brush='delphi';
@@ -120,8 +114,6 @@ SyntaxHighlighter.all();
    </div>
    </div>
    </div>	<?php require("inc/footer.php");?>
-
-
 
 </body>
 </html>

@@ -1,11 +1,10 @@
-<?php @session_start();?>
 <title>Submit Code</title>
 <?php 
 	require("inc/head.php");
 	require("inc/turnid.php");
-if (!isset($_SESSION['user_id'])){
+if (!$_SESSION['U'] -> getU_id()){
 	require("inc/header.php");
-	echo "<a href=loginpage.php>Please Login First</a>";
+	echo "<a href=index.php>Please Login First</a>";
 	require("inc/footer.php");
 	exit(0);
 }
@@ -13,14 +12,14 @@ if (!isset($_SESSION['user_id'])){
 if (isset($_GET['id'])){
 	$id=intval($_GET['id']);
 
-	require_once("inc/header1.php");
+	require("inc/header1.php");
 }else if (isset($_GET['cid'])&&isset($_GET['pid'])){
-	require_once("inc/header1.php");
+	require("inc/header1.php");
 	$cid=intval($_GET['cid']);$pid=intval($_GET['pid']);
 }
 else{
 	echo "<h2>No Such Problem!</h2>";
-	require_once("inc/footer.php");
+	require("inc/footer.php");
 	exit(0);
 }
 ?>
@@ -94,27 +93,27 @@ Language:</span>
   $lang=(~((int)$langmask))&1023;
  $C_=($lang&1)>0;
  $CPP_=($lang&2)>0;
- $P_=($lang&4)>0;
- $J_=($lang&8)>0;
- $R_=($lang&16)>0;
- $B_=($lang&32)>0;
- $Y_=($lang&64)>0;
- $H_=($lang&128)>0;
- $L_=($lang&256)>0;
- $S_=($lang&512)>0;
+ //$P_=($lang&4)>0;
+ //$J_=($lang&8)>0;
+ //$R_=($lang&16)>0;
+ //$B_=($lang&32)>0;
+ //$Y_=($lang&64)>0;
+ //$H_=($lang&128)>0;
+ //$L_=($lang&256)>0;
+ //$S_=($lang&512)>0;
  if(isset($_COOKIE['lastlang'])) $lastlang=$_COOKIE['lastlang'];
  else $lastlang=1;
  
  if($C_) echo"	    <option value=0 ".( $lastlang==0?"selected":"").">C</option>";
  if($CPP_) echo"	<option value=1 ".( $lastlang==1?"selected":"").">C++</option>";
- if($P_) echo"		<option value=2 ".( $lastlang==2?"selected":"").">Pascal</option>";
- if($J_) echo"		<option value=3 ".( $lastlang==3?"selected":"").">Java</option>";
- if($R_) echo"		<option value=4 ".( $lastlang==4?"selected":"").">Ruby</option>";
- if($B_) echo"		<option value=5 ".( $lastlang==5?"selected":"").">Bash</option>";
- if($Y_) echo"		<option value=6 ".( $lastlang==6?"selected":"").">Python</option>";
- if($H_) echo"		<option value=7 ".( $lastlang==7?"selected":"").">PHP</option>";
- if($L_) echo"		<option value=8 ".( $lastlang==8?"selected":"").">Perl</option>";
- if($S_) echo"		<option value=9 ".( $lastlang==9?"selected":"").">C-Sharp</option>";
+ //if($P_) echo"		<option value=2 ".( $lastlang==2?"selected":"").">Pascal</option>";
+ //if($J_) echo"		<option value=3 ".( $lastlang==3?"selected":"").">Java</option>";
+ //if($R_) echo"		<option value=4 ".( $lastlang==4?"selected":"").">Ruby</option>";
+ //if($B_) echo"		<option value=5 ".( $lastlang==5?"selected":"").">Bash</option>";
+ //if($Y_) echo"		<option value=6 ".( $lastlang==6?"selected":"").">Python</option>";
+ //if($H_) echo"		<option value=7 ".( $lastlang==7?"selected":"").">PHP</option>";
+ //if($L_) echo"		<option value=8 ".( $lastlang==8?"selected":"").">Perl</option>";
+ //if($S_) echo"		<option value=9 ".( $lastlang==9?"selected":"").">C-Sharp</option>";
  
 ?>
 </select>
@@ -126,7 +125,7 @@ Language:</span>
 	$sql="SELECT * FROM `solution` WHERE `solution_id`=".$sid;
 	$result=mysql_query($sql);
 	$row=mysql_fetch_object($result);
-	if ($row && $row->user_id==$_SESSION['user_id']) $ok=true;
+	if ($row && $row->user_id==$_SESSION['U'] -> getU_id()) $ok=true;
 	if (isset($_SESSION['source_browser'])) $ok=true;
 	mysql_free_result($result);
 	if ($ok==true){

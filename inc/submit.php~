@@ -129,7 +129,7 @@ if ($len<2){
 	exit(0);
 }
 if ($len>65536){
-	require_once("oj-header.php");
+	require("oj-header.php");
 	echo "Source Code Too Long!";
 	//require_once("oj-footer.php");
 	exit(0);

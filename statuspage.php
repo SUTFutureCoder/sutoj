@@ -1,10 +1,8 @@
-
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<meta http-equiv='refresh' content='60'>
-	<?php require_once("inc/header1.php");?>
-
+	<?php require("inc/header1.php");?>
 	<title><?php echo $view_title?></title>
 	<link rel=stylesheet href='css/sutoj.css' type='text/css'>
 

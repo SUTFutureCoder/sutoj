@@ -1,20 +1,29 @@
-<?php session_start();
-if (!isset($_SESSION['user_id'])){
-	//require_once("oj-header.php");
-	echo "<a href='loginpage.php'>Please Login First!</a>";
-	//require_once("oj-footer.php");
+<?php 
+	require("../include/user.class.php");
+	require("../include/db_info.inc.php");
+	@session_start(); 
+if (!$_SESSION['U'] -> getU_id()){
+	echo "<a href='index.php'>Please Login First!</a>";
 	exit(0);
 }
-if($_SESSION['freshman_contest'])
-$_POST['cid'] = "1";
+
+	$occurtime = date("Y-m-d H:i:s");	
+	$sql = "SELECT * FROM  `contest` WHERE  `contest_id` = 0 ";
+	$result = mysql_query($sql);
+	$contesttime = mysql_fetch_array($result);
+
+if($_SESSION['U'] -> getF_test())
+	if($occurtime < $contesttime['start_time'])
+	$_POST['cid'] = "3";	//新生热身赛模拟比赛号为3
+	else
+	$_POST['cid'] = "1";	//新生正赛模拟比赛号为1
 else
-$_POST['cid'] = "0";
+	if($occurtime < $contesttime['start_time'])
+	$_POST['cid'] = "2";	//老生热身赛模拟比赛号为2
+	else
+	$_POST['cid'] = "0";	//老生正赛模拟比赛号为0
 
-
-require_once("en.php");
-require_once("../include/db_info.inc.php");
-require_once("../include/const.inc.php");
-$user_id=$_SESSION['user_id'];
+$user_id = $_SESSION['U'] -> getU_id();
 
 if (isset($_POST['cid'])){
 	$cid=intval($_POST['cid']);
@@ -26,7 +35,7 @@ if (isset($_POST['cid'])){
 			SELECT `contest_id` FROM `contest` WHERE 
 			(`end_time`>NOW() or private=1)and `defunct`='N'
 			))";
-	if(!isset($_SESSION['administrator']))
+	if(!$_SESSION['U'] -> getAut() == "admin")
 		$sql.=" and defunct='N'";
 }
 //echo $sql;	
@@ -34,9 +43,7 @@ if (isset($_POST['cid'])){
 $res=mysql_query($sql);
 if ($res&&mysql_num_rows($res)<1){
 		mysql_free_result($res);
-		//require_once('oj-header.php');
 		echo "Where do find this link? No such problem.<br>";
-		//require_once('oj-footer.php');
 		exit(0);
 }
 mysql_free_result($res);
@@ -55,7 +62,6 @@ if (isset($_POST['id'])) {
 	if ($rows_cnt!=1){
 		echo "You Can't Submit Now Because Your are not invited by the contest or the contest is not running!!";
 		mysql_free_result($result);
-		//require_once("oj-footer.php");
 		exit(0);
 	}else{
 		$row=mysql_fetch_array($result);
@@ -70,7 +76,6 @@ if (isset($_POST['id'])) {
 			if ($ccnt==0){
 				require_once("contest-header.php");
 				echo "You are not invited!\n";
-				//require_once("oj-footer.php");
 				exit(0);
 			}
 		}
@@ -81,7 +86,6 @@ if (isset($_POST['id'])) {
 	if ($rows_cnt!=1){
 		require_once("contest-header.php");
 		echo "<h2>No Such Problem!</h2>";
-		//require_once("oj-footer.php");
 		mysql_free_result($result);
 		exit(0);
 	}else{
@@ -93,6 +97,7 @@ if (isset($_POST['id'])) {
 	echo "<h2>No Such Problem!</h2>";
 	exit(0);
 }
+//mark 1
 
 $language=intval($_POST['language']);
 if ($language>9 || $language<0) $language=0;
@@ -123,15 +128,11 @@ setcookie('lastlang',$language,time()+360000);
 $ip=$_SERVER['REMOTE_ADDR'];
 
 if ($len<2){
-	//require_once("oj-header.php");
 	echo "Source Code Too Short!";
-	//require_once("oj-footer.php");
 	exit(0);
 }
 if ($len>65536){
-	require("oj-header.php");
 	echo "Source Code Too Long!";
-	//require_once("oj-footer.php");
 	exit(0);
 }
 
@@ -140,14 +141,8 @@ if ($len>65536){
 $sql="SELECT `in_date` from `solution` where `user_id`='$user_id' and in_date>now()-10 order by `in_date` desc limit 1";
 $res=mysql_query($sql);
 if (mysql_num_rows($res)==1){
-	//$row=mysql_fetch_row($res);
-	//$last=strtotime($row[0]);
-	//$cur=time();
-	//if ($cur-$last<10){
 		echo "You should not submit more than twice in 10 seconds.....<br>";
-		//require_once('oj-footer.php');
 		exit(0);
-	//}
 }
 switch($id)
 {
@@ -162,14 +157,8 @@ switch($id)
 
 }
 
-
-//if (!isset($pid)){
-//$sql="INSERT INTO solution(problem_id,user_id,in_date,language,ip,code_length)
-//	VALUES('$id','$user_id',NOW(),'$language','$ip','$len')";
-//}else{
 $sql="INSERT INTO solution(problem_id,user_id,in_date,language,ip,code_length,contest_id,num)
 	VALUES('$id','$user_id',NOW(),'$language','$ip','$len','$cid','$pid')";
-//}
 mysql_query($sql);
 $insert_id=mysql_insert_id();
 
@@ -183,7 +172,7 @@ mysql_query($sql);
 	    $statusURI.="?cid=$cid";
 	    
         $sid="";
-        if (isset($_SESSION['user_id'])){
+        if ($_SESSION['U'] -> getU_id()){
                 $sid.=session_id().$_SERVER['REMOTE_ADDR'];
         }
         if (isset($_SERVER["REQUEST_URI"])){

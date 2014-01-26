@@ -105,6 +105,9 @@ class User{
 	public function getF_test(){
 		return $this -> freshman_contest;}
 		
+	public function setF_test($f_test){
+		$this -> freshman_contest = $f_test;}
+		
 	public function getSub(){
 		return $this -> submit;}
 		
