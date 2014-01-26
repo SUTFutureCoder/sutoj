@@ -13,31 +13,25 @@ $(document).ready(function()
 					
 <?PHP
 
-if($_SESSION['user_id'] != "admin")
-{		$occurtime = date("Y-m-d H:i:s");
-	$sql = "SELECT * FROM  `contest` WHERE  `contest_id` =201311";
-	$result= mysql_query($sql);
-	$conteststart=mysql_fetch_array($result);
-	//echo $conteststart['start_time'];
+if($_SESSION['U'] -> getAut() != "admin")
+{		
+	
 
-	if($occurtime < $conteststart['start_time'])
+	if(($occurtime < $contesttime['pre_start_time'] && $contesttime['pre']) || ($occurtime < $contesttime['start_time'] && !$contesttime['pre']))
 	{
-	echo "</br></br><h1 style=\"color:blue\">比赛尚未开始，敬请期待". $conteststart['start_time']  ."</h1></br></br></br></br></br>";
-
-	require("int/bodyfooter.php");
-exit(0);
-
-
-	}
-	if( $occurtime > $conteststart['end_time'])
-	{
-	echo "</br></br><h1 style=\"color:blue\">比赛已经结束，感谢您的关注！</h1></br></br></br></br></br>";
-
+	echo "</br></br><h1 style=\"color:blue\">比赛尚未开始，敬请期待". $conteststart['pre_start_time']  ."</h1></br></br></br></br></br>";
 	require("bodyfooter.php");
 exit(0);
-
 	}
+	if(($occurtime > $contesttime['pre_end_time'] && $contesttime['pre']) || ($occurtime > $contesttime['end_time'] && !$contesttime['pre']))
+	{
+	echo "</br></br><h1 style=\"color:blue\">比赛已经结束，感谢您的关注！</h1></br></br></br></br></br>";
+	require("bodyfooter.php");
+exit(0);
+	}
+
 }
+
 
 ?>
 <h3 align='center'>

@@ -23,13 +23,14 @@ class User{
 	private $authorizee;
 	
 	public function __construct($t_id, $u_id, $t_n1, $t_m1, $t_n2, $t_m2, $t_n3, $t_m3, $t_tel, $f_test, $sub, $sol, $def, $ip, $acc, $vol, $lan, $r_time, $nic, $aut){
-	
+	if($aut != "admin" && $aut != "Volunteer"){
 	if(!$t_id || !$u_id)
 		throw new Exception('致命错误-1阶段1队伍编号获取失败');
 	if(!$t_n1 || !$t_m1)
 		throw new Exception('致命错误-1阶段2队伍基础信息获取失败');
 	if(!$t_tel || !$ip || !$acc || !$lan || !$r_time || !$nic)
 		throw new Exception('致命错误-1阶段3队伍附加信息获取失败');
+	}
 		
 	$this -> team_id = $t_id;
 	$this -> user_id = $u_id;

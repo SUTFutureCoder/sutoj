@@ -2,7 +2,9 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<title><?php echo $view_title?></title>
-	<?php require_once("inc/head.php");require_once("inc/header1.php"); require_once("inc/en.php")?>
+	<?php require_once("inc/head.php");require_once("inc/header1.php"); require_once("inc/en.php")
+	//注意此脚本可能会让新生赛漏答案
+	?>
 
 	<link rel=stylesheet href='css/sutoj.css' type='text/css'>
 </head>

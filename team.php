@@ -4,11 +4,6 @@ include "inc/head.php";
 include "inc/header1.php";
 ?> 
 
-
-
-
-
-
 <style>
 table {  
 *border-collapse: collapse; /* IE7 and lower */  

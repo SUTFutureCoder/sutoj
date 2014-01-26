@@ -13,7 +13,7 @@ if (isset($_GET['id'])){
 	// practice
 	$id=intval($_GET['id']);
   //require("oj-header.php");
-	if (!isset($_SESSION['administrator']) && $id!=1000&&!isset($_SESSION['contest_creator']))
+	if ($_SESSION['U'] -> getAut() != "admin" && $id!=1000 )
 		$sql="SELECT * FROM `problem` WHERE `problem_id`=$id AND `defunct`='N' ";
 	else
 		$sql="SELECT * FROM `problem` WHERE `problem_id`=$id";
@@ -24,7 +24,7 @@ if (isset($_GET['id'])){
 	$cid=intval($_GET['cid']);
 	$pid=intval($_GET['pid']);
 
-	if (!isset($_SESSION['administrator']))
+	if ($_SESSION['U'] -> getAut() != "admin")
 		$sql="SELECT langmask,private,defunct FROM `contest` WHERE `defunct`='N' AND `contest_id`=$cid AND `start_time`<'$now'";
 	else
 		$sql="SELECT langmask,private,defunct FROM `contest` WHERE `defunct`='N' AND `contest_id`=$cid";
@@ -34,7 +34,7 @@ if (isset($_GET['id'])){
 	$contest_ok=true;
 	if ($row[1] && !isset($_SESSION['c'.$cid])) $contest_ok=false;
 	if ($row[2]=='Y') $contest_ok=false;
-	if (isset($_SESSION['administrator'])) $contest_ok=true;
+	if ($_SESSION['U'] -> getAut() == "admin") $contest_ok=true;
 				
 	
     $ok_cnt=$rows_cnt==1;		

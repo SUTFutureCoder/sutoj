@@ -1,18 +1,18 @@
 <?php require_once("bodyheader.php"); 
 
-	if($_SESSION['user_id'] != "admin")
+	if($_SESSION['U'] -> getAut() != "admin")
 	{
 		$occurtime = date("Y-m-d H:i:s");
-		$sql = "SELECT * FROM  `contest` WHERE  `contest_id` =201311";
+		$sql = "SELECT * FROM  `contest` WHERE  `contest_id` = 0";
 		$result= mysql_query($sql);
-		$conteststart=mysql_fetch_array($result);
+		$contesttime=mysql_fetch_array($result);
 		//echo $conteststart['start_time'];
-		if($occurtime < $conteststart['start_time'])
+		if(($occurtime < $contesttime['start_time'] && !$contesttime['pre']) || ($occurtime < $contesttime['pre_start_time'] && $contesttime['pre']) )
 		{
 			echo "</br></br><h1 style=\"color:blue\">比赛尚未开始，敬请期待". $conteststart['start_time']  ."</h1></br></br></br></br></br>";
 			goto end;
 		}
-		if( $occurtime > $conteststart['end_time'])
+		if(($occurtime >= $contesttime['end_time'] && !$contesttime['pre']) || ($occurtime >= $contesttime['pre_end_time'] && $contesttime['pre']) )
 		{
 		echo "</br></br><h1 style=\"color:blue\">比赛已经结束，感谢您的关注！</h1></br></br></br></br></br>";
 		goto end;
