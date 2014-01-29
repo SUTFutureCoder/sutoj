@@ -1,18 +1,26 @@
 <?php
-@session_start();
-if($_SESSION['freshman_contest']){
-	$_GET['cid'] = 1;
-}
-else{
-	$_GET['cid'] = 0;
-}
+require("inc/head.php");
+	$occurtime = date("Y-m-d H:i:s");	
+	$sql = "SELECT * FROM  `contest` WHERE  `contest_id` = 0 ";
+	$result = mysql_query($sql);
+	$contest = mysql_fetch_array($result);
+
+if($_SESSION['U'] -> getF_test())
+	if($occurtime < $contest['start_time'])
+	$_GET['cid'] = "3";	//新生热身赛模拟比赛号为3
+	else
+	$_GET['cid'] = "1";	//新生正赛模拟比赛号为1
+else
+	if($occurtime < $contest['start_time'])
+	$_GET['cid'] = "2";	//老生热身赛模拟比赛号为2
+	else
+	$_GET['cid'] = "0";	//老生正赛模拟比赛号为0
+
 
 ini_set("display_errors","On");
 		ob_start();
 		header ( "content-type:   application/excel" );
 		
-?>
-<?php require("inc/head.php");
 global $mark_base,$mark_per_problem,$mark_per_punish;
  $mark_start=60;
  $mark_end=100;
@@ -126,7 +134,7 @@ function  getMark($users,  $start,  $end, $s) {
 if (!isset($_GET['cid'])) die("No Such Contest!");
 $cid=intval($_GET['cid']);
 //require_once("contest-header.php");
-$sql="SELECT `start_time`,`title` FROM `contest` WHERE `contest_id`='$cid'";
+$sql="SELECT `start_time`,`title` FROM `contest` WHERE `contest_id`= 0 ";
 $result=mysql_query($sql) or die(mysql_error());
 $rows_cnt=mysql_num_rows($result);
 $start_time=0;
@@ -152,7 +160,7 @@ if ($start_time>time()){
 	exit(0);
 }
 
-$sql="SELECT count(1) FROM `contest_problem` WHERE `contest_id`='$cid'";
+$sql="SELECT count(1) FROM `schoolcontest_problem` WHERE `contest_id`='$cid'";
 $result=mysql_query($sql);
 $row=mysql_fetch_array($result);
 $pid_cnt=intval($row[0]);

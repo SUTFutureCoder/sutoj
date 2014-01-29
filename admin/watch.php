@@ -2,8 +2,8 @@
 <head>
 <title>JudgeOnline Administration</title>
 </head>
-<frameset rows="20,*">
-<frame name="rank" src="../contest.php">
+<frameset rows="50%,*">
+<frame name="rank" src="../contestrank.php">
 <frame name="status" src="../status.php">
 <noframes>
 

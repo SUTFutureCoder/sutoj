@@ -1,20 +1,29 @@
 <?php
-@session_start();
-if($_SESSION['freshman_contest']){
-	$_GET['cid'] = 1;
-}
-else{
-	$_GET['cid'] = 0;
-}
+require("inc/head.php");
+	$occurtime = date("Y-m-d H:i:s");	
+	$sql = "SELECT * FROM  `contest` WHERE  `contest_id` = 0 ";
+	$result = mysql_query($sql);
+	$contest = mysql_fetch_array($result);
+
+if($_SESSION['U'] -> getF_test())
+	if($occurtime < $contest['start_time'])
+	$_GET['cid'] = "3";	//新生热身赛模拟比赛号为3
+	else
+	$_GET['cid'] = "1";	//新生正赛模拟比赛号为1
+else
+	if($occurtime < $contest['start_time'])
+	$_GET['cid'] = "2";	//老生热身赛模拟比赛号为2
+	else
+	$_GET['cid'] = "0";	//老生正赛模拟比赛号为0
 
 	$OJ_CACHE_SHARE=true;
 	$cache_time=30;
-	require("inc/head.php");
+
 // contest start time
 if (!isset($_GET['cid'])) die("No Such Contest!");
 $cid=intval($_GET['cid']);
 
-$sql="SELECT * FROM `contest` WHERE `contest_id`='$cid' AND `start_time`<NOW()";
+$sql="SELECT * FROM `contest` WHERE `contest_id`=0 AND `start_time`<NOW()";
 $result=mysql_query($sql);
 $num=mysql_num_rows($result);
 if ($num==0){
@@ -26,7 +35,7 @@ mysql_free_result($result);
 
 $view_title= "Contest Statistics";
 
-$sql="SELECT count(`num`) FROM `contest_problem` WHERE `contest_id`='$cid'";
+$sql="SELECT count(`num`) FROM `schoolcontest_problem` WHERE `contest_id`='$cid'";
 $result=mysql_query($sql);
 $row=mysql_fetch_array($result);
 $pid_cnt=intval($row[0]);
@@ -69,7 +78,7 @@ mysql_free_result($result);
 
 $res=3600;
 
-$sql="SELECT (UNIX_TIMESTAMP(end_time)-UNIX_TIMESTAMP(start_time))/100 FROM contest WHERE contest_id=$cid ";
+$sql="SELECT (UNIX_TIMESTAMP(end_time)-UNIX_TIMESTAMP(start_time))/100 FROM contest WHERE contest_id=0 ";
         $result=mysql_query($sql);
         $view_userstat=array();
         if($row=mysql_fetch_array($result)){

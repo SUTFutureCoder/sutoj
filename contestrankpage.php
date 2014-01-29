@@ -71,7 +71,6 @@ $rank=1;
 <center><h3>Contest RankList -- <?php echo $title?></h3><a href="contestrank.xls.php?cid=<?php echo $cid?>" >Download</a></center>
 <table id=rank><thead><tr class=toprow align=center><td class="{sorter:'false'}" width=5%>Rank<th width=10%>User<th width=10%>Nick<th width=5%>Penalty
 <?php
-
 for ($i=0;$i<$pid_cnt;$i++)
 	echo "<th class=\"{sorter:'punish'}\"><a href=problem.php?cid=$cid&pid=$i>$PID[$i]</a>";
      echo "</tr></thead>\n<tbody>";
@@ -82,11 +81,11 @@ for ($i=0;$i<$user_cnt;$i++){
 
 	if($rank >= 1 && $rank <= 3)	
 	echo "<td style=\"color:red;	background-color:#FFFF00;\">";
-	if(($rank >= 4 && $rank <= 12 && !$_SESSION['freshman_contest']) || ($rank >= 4 && $rank <= 9 && $_SESSION['freshman_contest']))
+	if(($rank >= 4 && $rank <= 12 && !$_SESSION['U'] -> getF_test()) || ($rank >= 4 && $rank <= 9 && $_SESSION['U'] -> getF_test()))
 	echo "<td style=\"color:red;	background-color:#CCCCCC;\">";
-	if(($rank >= 13 && $rank <= 30 && !$_SESSION['freshman_contest']) || ($rank >= 10 && $rank <= 18 && $_SESSION['freshman_contest']))
+	if(($rank >= 13 && $rank <= 30 && !$_SESSION['U'] -> getF_test()) || ($rank >= 10 && $rank <= 18 && $_SESSION['U'] -> getF_test()))
 	echo "<td style=\"color:red;	background-color:#FF9933;\">";
-	if(($rank >30 && !$_SESSION['freshman_contest']) || ($rank >18 && $_SESSION['freshman_contest']))
+	if(($rank >30 && !$_SESSION['U'] -> getF_test()) || ($rank >18 && $_SESSION['U'] -> getF_test()))
 	echo "<td style=\"color:red;	\">";
 
 	if($rank == 1)
@@ -107,7 +106,7 @@ for ($i=0;$i<$user_cnt;$i++){
 		
 a:
 	$usolved=$U[$i]->solved;
-$_GET['user_id'] = $_SESSION['user_id'];
+	$_GET['user_id'] = $_SESSION['U'] -> getU_id();
   if($uuid==$_GET['user_id']) echo "<td>";
   else echo"<td>";
 	echo "<a name=\"$uuid\" >$uuid</a>";

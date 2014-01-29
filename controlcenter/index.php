@@ -6,8 +6,9 @@
 </head>
 
 <?php
+require("../include/user.class.php");
 @session_start();
-if($_SESSION['user_id'] != "admin")
+if($_SESSION['U'] -> getU_id() != "admin")
 echo "非法操作";
     require_once('../include/db_info.inc.php');
 	require_once('../inc/turnid.php');

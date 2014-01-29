@@ -6,11 +6,12 @@
 </head>
 <body>
 <?php
-@session_start();
+require("../include/user.class.php");
+require('../include/db_info.inc.php');
 //echo $_SESSION['authorizee'];
-if(@$_SESSION['authorizee'] != "Volunteer")
+if(@$_SESSION['U'] -> getAut() != "Volunteer")
 {
-if($_SESSION['user_id'] != "admin")
+if($_SESSION['U'] -> getU_id() != "admin")
 {
 echo "<h1 style=\"color:red\">抱歉您不是志愿者，无法使用送球系统。</h1>";
 exit(0);
@@ -18,31 +19,28 @@ exit(0);
 }
 
 
-
-    require('../include/db_info.inc.php');
     require('turnid.php');
 
 	
 	$occurtime = date("Y-m-d H:i:s");
-	$sql = "SELECT * FROM  `contest` WHERE  `contest_id` =201311";
+	$sql = "SELECT * FROM  `contest` WHERE  `contest_id` = 0";
 	$result= mysql_query($sql);
 	$conteststart=mysql_fetch_array($result);
 	//echo $conteststart['start_time'];
 
-	if($occurtime < $conteststart['start_time'])
+	if(($occurtime < $conteststart['start_time'] && !$conteststart['pre']) || ($occurtime < $conteststart['pre_start_time'] && $conteststart['pre']))
 	{
 	echo "</br></br><h1 style=\"color:blue\">比赛尚未开始，敬请期待". $conteststart['start_time']  ."</h1></br></br></br></br></br>";
-
 exit(0);
-
-
 	}
-	if( $occurtime > $conteststart['end_time'])
+	if(($occurtime > $conteststart['end_time'] && !$conteststart['pre']) || ($occurtime > $conteststart['pre_end_time'] && $conteststart['pre']))
 	{
 	echo "</br></br><h1 style=\"color:blue\">比赛已经结束，感谢您的关注！</h1></br></br></br></br></br>";
 
 exit(0);
 	}
+	
+
 	?>
 <div class="marquee" ><marquee scrollamount="2" width=100% scrolldelay="40" onmouseover="javascript:this.stop();" onmouseout="javascript:this.start();"><b style="margin-right:20px"><br/>
 <a href="#" style="color:red"><?PHP
@@ -89,7 +87,7 @@ exit(0);
 	
 		$team_id = substr($row['user_id'], 4, 10);
 		//if((($ball['nick'] - 1 )* 10 < $team_id && $team_id <= $ball['nick'] * 10 ) || $_SESSION['user_id'] == "admin")
-		if(($_SESSION['user_id'] == "v1" && $team_id >=1 && $team_id <= 48 ) || $_SESSION['user_id'] == "admin" )
+		if(($_SESSION['U'] -> getU_id() == "v1" && $team_id >=1 && $team_id <= 48 ) || $_SESSION['U'] -> getU_id() == "admin" )
 		{
 		
 		echo "<form  action=\"songqiureturn.php\" method=\"post\">";
@@ -104,7 +102,7 @@ exit(0);
 		echo "<tr>";
 		echo "<tr/></form>";
 		}
-		if(($_SESSION['user_id'] == "v2" && $team_id >=49 && $team_id <= 100 ) || $_SESSION['user_id'] == "admin" )		
+		if(($_SESSION['U'] -> getU_id() == "v2" && $team_id >=49 && $team_id <= 100 ) || $_SESSION['U'] -> getU_id() == "admin" )		
 		{
 				echo "<form  action=\"songqiureturn.php\" method=\"post\">";
 
@@ -144,7 +142,7 @@ exit(0);
 		else
 		$team_id = "";
 		//if((($ball['nick'] - 1 )* 10 < $team_id && $team_id <= $ball['nick'] * 10 ) || $_SESSION['user_id'] == "admin")
-		if(($_SESSION['user_id'] == "v1" && $team_id >=1 && $team_id <= 48 ) || $_SESSION['user_id'] == "admin" )
+		if(($_SESSION['U'] -> getU_id() == "v1" && $team_id >=1 && $team_id <= 48 ) || $_SESSION['U'] -> getU_id() == "admin" )
 		{
 
 		echo "<form  action=\"songqiureturnback.php\" method=\"post\">";
@@ -159,7 +157,7 @@ exit(0);
 		echo "<tr>";
 		echo "<tr/></form>";
 		}
-		if(($_SESSION['user_id'] == "v2" && $team_id >=49 && $team_id <= 100 ) || $_SESSION['user_id'] == "admin" )		
+		if(($_SESSION['U'] -> getU_id() == "v2" && $team_id >=49 && $team_id <= 100 ) || $_SESSION['U'] -> getU_id() == "admin" )		
 		{
 		echo "<form  action=\"songqiureturnback.php\" method=\"post\">";
 		$id = $row['solution_id'];

@@ -399,14 +399,10 @@ if(!$OJ_MEMCACHE)mysql_free_result($result);
 if($_SESSION['U'] -> getAut == "admin")
 {
 require("statuspage.php");
-
 	if($_SESSION['U'] -> getF_test())
 	$_SESSION['U'] -> setF_test(0);
 	else
 	$_SESSION['U'] -> setF_test(0);
-
-	
-
 }else
 /////////////////////////Template
 require("statuspage.php");
@@ -414,4 +410,5 @@ require("statuspage.php");
 if(file_exists('./include/cache_end.php'))
 	require_once('./include/cache_end.php');
 ?>
+
 

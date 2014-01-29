@@ -1,13 +1,15 @@
-<?php require_once("admin-header.php");?>
-<?php if (!($_SESSION['user_id'] == "admin"|| isset($_SESSION['password_setter']) )){
+<?php require("admin-header.php");?>
+<link rel=stylesheet href='css/bootstrap.min.css' type='text/css'>
+<link rel=stylesheet href='css/bootstrap-responsive.min.css' type='text/css'>
+<?php if (!($_SESSION['U'] -> getU_id() == "admin"|| isset($_SESSION['password_setter']) )){
 	echo "<a href='../index.php'>Please Login First!</a>";
 	exit(1);
 }
 if(isset($_POST['do'])){
 	//echo $_POST['user_id'];
-	require_once("../include/check_post_key.php");
+	require("../include/check_post_key.php");
 	//echo $_POST['passwd'];
-	require_once("../include/my_func.inc.php");
+	require("../include/my_func.inc.php");
 	
 	$user_id=$_POST['user_id'];
     $passwd =$_POST['passwd'];
@@ -24,10 +26,11 @@ if(isset($_POST['do'])){
 }
 ?>
 <form action='changepass.php' method=post>
-	<b>Change Password:</b><br />
+      <legend>更改密码</legend>
+<br />
 	User:<input type=text size=10 name="user_id"><br />
 	Pass:<input type=text size=10 name="passwd"><br />
-	<?php require_once("../include/set_post_key.php");?>
+	<?php require("../include/set_post_key.php");?>
 	<input type='hidden' name='do' value='do'>
 	<input type=submit value='Change'>
 </form>
