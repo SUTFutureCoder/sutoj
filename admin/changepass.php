@@ -28,7 +28,7 @@ if(isset($_POST['do'])){
 <form action='changepass.php' method=post>
       <legend>更改密码</legend>
 <br />
-	User:<input type=text size=10 name="user_id"><br />
+	User: team<input type=text size=10 name="user_id" class="input-small"><br />
 	Pass:<input type=text size=10 name="passwd"><br />
 	<?php require("../include/set_post_key.php");?>
 	<input type='hidden' name='do' value='do'>

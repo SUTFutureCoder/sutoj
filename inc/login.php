@@ -36,7 +36,8 @@
 	
 	
     $user_id = $_POST['user_id'];
-	$password = $_POST['password'];
+	$password = mysql_real_escape_string ($_POST['password']);
+	
 	if(!(ctype_alnum($user_id) && ctype_alnum($password))){
 		echo "<script language='javascript'>\n";
 		echo "alert('检测到非法字符，请重新输入');\n";

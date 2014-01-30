@@ -179,6 +179,18 @@ exit(0);
 exit(0);
 
 	}
+//安全性转换
+$team_number1 = mysql_real_escape_string($_POST['team_number1']);
+$team_member1 = mysql_real_escape_string($_POST['team_member1']);
+$team_number2 = mysql_real_escape_string($_POST['team_number2']);
+$team_member2 = mysql_real_escape_string($_POST['team_member2']);
+$team_number3 = mysql_real_escape_string($_POST['team_number3']);
+$team_member3 = mysql_real_escape_string($_POST['team_member3']);
+$team_name = mysql_real_escape_string($_POST['team_name']);
+$team_telephone = mysql_real_escape_string($_POST['team_telephone']);
+$password = mysql_real_escape_string($_POST['password']);
+
+
 
 $team_number1 =substr($_POST['team_number1'],0,7);
 $team_number2 =substr($_POST['team_number2'],0,7);

@@ -83,4 +83,55 @@ function check_ac($cid,$pid){
 	if ($sub>0) return "<font color=red>N</font>";
 	else return "";
 }
+
+function create_password($pw_length){
+	$randpwd = "";
+	for($i = 0; $i < $pw_length; $i++){
+		$randctl = mt_rand(0,2);
+		switch($randctl){
+			case 0: $randpwd .= chr(mt_rand(48,57)); break;
+			case 1: $randpwd .= chr(mt_rand(65,90)); break;
+			case 2: $randpwd .= chr(mt_rand(97,122));break;		
+		}	
+	}
+	return $randpwd;
+}
+
+/**
+    * 导出数据为excel表格
+    *@param $data    一个二维数组,结构如同从数据库查出来的数组
+    *@param $title   excel的第一行标题,一个数组,如果为空则没有标题
+    *@param $filename 下载的文件名
+    *@examlpe 
+    $stu = M ('User');
+    $arr = $stu -> select();
+    exportexcel($arr,array('id','账户','密码','昵称'),'文件名!');
+*/
+function exportexcel($data=array(),$title=array(),$filename='report'){
+    header("Content-type:application/octet-stream");
+    header("Accept-Ranges:bytes");
+    header("Content-type:application/vnd.ms-excel;charset=UTF-8");  
+    header("Content-Disposition:attachment;filename=".$filename.".xls");
+    header("Pragma: no-cache");
+    header("Expires: 0");
+    //导出xls 开始
+    if (!empty($title)){
+        foreach ($title as $k => $v) {
+            $title[$k]=$v;
+        }
+        $title= implode("\t", $title);
+        echo "$title\n";
+    }
+    if (!empty($data)){
+        foreach($data as $key=>$val){
+            foreach ($val as $ck => $cv) {
+                $data[$key][$ck]=$cv;
+            }
+            $data[$key]=implode("\t", $data[$key]);
+            
+        }
+        echo implode("\n",$data);
+    }
+ }
+
 ?>

@@ -21,6 +21,15 @@ include "inc/header1.php";
 					<div class="margin"><img src="images/margin.jpg"/></div>
 
 <?php
+//安全性转换
+$team_number2 = mysql_real_escape_string($_POST['team_number2']);
+$team_member2 = mysql_real_escape_string($_POST['team_member2']);
+$team_number3 = mysql_real_escape_string($_POST['team_number3']);
+$team_member3 = mysql_real_escape_string($_POST['team_member3']);
+$team_name = mysql_real_escape_string($_POST['team_name']);
+$team_telephone = mysql_real_escape_string($_POST['team_telephone']);
+$password = mysql_real_escape_string($_POST['password']);
+
 
 
 if($_SERVER['REQUEST_METHOD']=='POST')

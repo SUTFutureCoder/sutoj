@@ -50,7 +50,7 @@ if($_SESSION['U'] -> getU_id() != "admin"){
 				</div>
 				<div title="用户相关">
 					<a href="javascript:void(0);" src="changepass.php" class="cs-navi-tab">更改密码</a></p>
-					<a href="javascript:void(0);" src="../../public/news/shuma/diannao.htm" class="cs-navi-tab">批量生成随机密码</a></p>
+					<a href="javascript:void(0);" src="settingpasses_auto.php" class="cs-navi-tab">批量生成随机密码</a></p>
 					<a href="javascript:void(0);" src="../team.php" class="cs-navi-tab">参赛队伍</a></p>
 					<a href="javascript:void(0);" src="../../public/news/shuma/yingyong.htm" class="cs-navi-tab">参赛队伍专业分布情况统计</a></p>
 				</div>

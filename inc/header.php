@@ -153,7 +153,7 @@ $(document).ready(
 				<form class="clearfix" action="inc/login.php" method="post">
 					<h1 class="padlock">用户登录</h1>
 					<label class="grey" for="log" >报名号:</label>
-					<input class="field" type="text" name="user_id" id="log" value="" size="23" />
+					<input class="field" type="text" name="user_id" id="log"  onBlur="if (value ==''){value='例：team99'}" onClick="if(this.value!='')this.value=''" value="例：team99" size="23" />
 					<label class="grey" for="pwd" >密码:</label>
 					<input class="field" type="password" name="password" id="pwd" size="23" />
         			<div class="clear"></div>
