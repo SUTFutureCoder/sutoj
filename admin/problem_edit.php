@@ -1,31 +1,22 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>Edit Problem</title>
+<link rel=stylesheet href='css/bootstrap.min.css' type='text/css'>
+<link rel=stylesheet href='css/bootstrap-responsive.min.css' type='text/css'>
+
 </head>
 <body>
-<center>
-<?php require_once("../include/db_info.inc.php");?>
-<?php require_once("admin-header.php");
-
-if (!($_SESSION['user_id'] == "admin"
-      ||isset($_SESSION['problem_editor'])
-     )){
-	echo "<a href='../index.php'>Please Login First!</a>";
-	exit(1);
-}
-?>
 <?php
-include_once("../fckeditor/fckeditor.php") ;
+require("admin-header.php");
+require("../include/db_info.inc.php");
+include("../extra/fckeditor/fckeditor.php");
 ?>
-<p align="center"><font color="#333399" size="4">Welcome To Administrator's Page of Judge Online of ACM ICPC, <?php echo $OJ_NAME?>.</font>
-<td width="100"></td>
-</center>
-<hr>
+<legend>编辑题目</legend>
+
 <?php if(isset($_GET['id'])){
-	require_once("../include/check_get_key.php");
+	require("../include/check_get_key.php");
 ?>
-<h1>Edit problem</h1>
+
 <form method=POST action=problem_edit.php>
 <input type=hidden name=problem_id value=New Problem>
 <?php $sql="SELECT * FROM `problem` WHERE `problem_id`=".intval($_GET['id']);
@@ -47,10 +38,9 @@ $row=mysql_fetch_object($result);
 
 <?php
 $description = new FCKeditor('description') ;
-$description->BasePath = '../fckeditor/' ;
+$description->BasePath = '../extra/fckeditor/' ;
 $description->Height = 600 ;
 $description->Width=600;
-
 $description->Value = $row->description ;
 $description->Create() ;
 ?>
@@ -60,7 +50,7 @@ $description->Create() ;
 
 <?php
 $input = new FCKeditor('input') ;
-$input->BasePath = '../fckeditor/' ;
+$input->BasePath = '../extra/fckeditor/' ;
 $input->Height = 600 ;
 $input->Width=600;
 
@@ -75,7 +65,7 @@ $input->Create() ;
 
 <?php
 $output = new FCKeditor('output') ;
-$output->BasePath = '../fckeditor/' ;
+$output->BasePath = '../extra/fckeditor/' ;
 $output->Height = 600 ;
 $output->Width=600;
 
@@ -88,7 +78,7 @@ $output->Create() ;
 <p>Hint:<br>
 <?php
 $output = new FCKeditor('hint') ;
-$output->BasePath = '../fckeditor/' ;
+$output->BasePath = '../extra/fckeditor/' ;
 $output->Height = 200 ;
 $output->Width=600;
 
@@ -105,11 +95,11 @@ Y<input type=radio name=spj value='1' <?php echo $row->spj=="1"?"checked":""?>><
 <input type=submit value=Submit name=submit>
 </div></form>
 <p>
-<?php require_once("../inc/footer.php");?>
+
 <?php }else{
 require_once("../include/check_post_key.php");
 $id=intval($_POST['problem_id']);
-if(!(isset($_SESSION["p$id"])||$_SESSION['user_id'] == "admin")) exit();	
+
 $title=$_POST['title'];
 $time_limit=$_POST['time_limit'];
 $memory_limit=$_POST['memory_limit'];

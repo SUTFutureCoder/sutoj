@@ -25,6 +25,7 @@
 	$private = $_POST['private'];
 	$pre_contest = $_POST['pre_contest'];
 	$contest = $_POST['contest'];
+	$fresh = $_POST['fresh'];
 
 	if (get_magic_quotes_gpc ()){
     	$title = stripslashes ($title);
@@ -32,6 +33,7 @@
      	$pre = stripslashes ($pre);
      	$pre_contest = stripslashes ($pre_contest);
 		$contest = stripslashes ($contest);
+		$fresh = stripslashes($fresh);
      }
 
 	$title=mysql_real_escape_string($title);
@@ -39,26 +41,32 @@
 	$pre=mysql_real_escape_string($pre);
 	$pre_contest = mysql_real_escape_string($pre_contest);
 	$contest = mysql_real_escape_string($contest);
+	$fresh = mysql_real_escape_string($fresh);
 	
 	
-	$sql = "UPDATE contest SET title = '$title', start_time = '$starttime', end_time = '$endtime', pre_start_time = '$pre_starttime', pre_end_time = '$pre_endtime', private = '$private', pre = '$pre', pre_problem_sum = '$pre_contest', problem_sum = '$contest' WHERE contest_id = 0";
+	$sql = "UPDATE contest SET title = '$title', start_time = '$starttime', end_time = '$endtime', pre_start_time = '$pre_starttime', pre_end_time = '$pre_endtime', private = '$private', pre = '$pre', pre_problem_sum = '$pre_contest', problem_sum = '$contest' , fresh = '$fresh' WHERE contest_id = 0";
 	//echo $sql;
 	mysql_query($sql) or die(mysql_error());
 	mysql_query("TRUNCATE TABLE schoolcontest_problem");	
 	
+
 	$num = 1001;
 	for($i = 0; $i < $contest; $i++, $num++){
 		mysql_query("INSERT INTO schoolcontest_problem (`problem_id`, `contest_id`, `num`) VALUES ('$num', 0, '$i')")or die(mysql_error());	
 	}
+if($fresh){
 	for($i = 0; $i < $contest; $i++, $num++){
 		mysql_query("INSERT INTO schoolcontest_problem (`problem_id`, `contest_id`, `num`) VALUES ('$num', 1, '$i')")or die(mysql_error());
 	}
+}
 	for($i = 0; $i < $pre_contest; $i++, $num++){
 		mysql_query("INSERT INTO schoolcontest_problem (`problem_id`, `contest_id`, `num`) VALUES ('$num', 2, '$i')")or die(mysql_error());	
 	}
+if($fresh){
 	for($i = 0; $i < $pre_contest; $i++, $num++){
 		mysql_query("INSERT INTO schoolcontest_problem (`problem_id`, `contest_id`, `num`) VALUES ('$num', 3, '$i')")or die(mysql_error());	
 	}
+}
 	echo "<script>alert('设置成功！');</script>";
 }
 ?>
@@ -97,6 +105,9 @@
 	进行阶段:<select name=pre><option value=0>正赛</option><option value=1>热身赛</option></select>
 	
 	描述:<select name=private><option value=0>公有</option><option value=1>私有</option></select>
+	<br>
+	是否添加新生组:<select name=fresh><option value=0>否</option><option value=1>是</option></select>
+	<br>
 
 	<?php require("../include/set_post_key.php");?>
 	<br>题量设置:<br>热身赛<input class=input-mini type=text size=2 name=pre_contest value=5>

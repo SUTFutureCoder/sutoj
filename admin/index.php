@@ -42,11 +42,11 @@ if($_SESSION['U'] -> getU_id() != "admin"){
 				<div title="OJ相关">
 					<a href="javascript:void(0);" src="regtime_setting.php" class="cs-navi-tab">设置注册时间</a></p>
 					<a href="javascript:void(0);" src="contest_setting.php" class="cs-navi-tab">更改比赛信息</a></p>
-					<a href="javascript:void(0);" src="../../public/news/shuma/diannao.htm" class="cs-navi-tab">添加题目</a></p>
-					<a href="javascript:void(0);" src="../../public/news/shuma/diannao.htm" class="cs-navi-tab">更改题目</a></p>
-					<a href="javascript:void(0);" src="../../public/news/shuma/pingban.htm" class="cs-navi-tab">重判</a></p>
-					<a href="javascript:void(0);" src="../../public/news/shuma/yingyong.htm" class="cs-navi-tab">导入题目</a></p>
-					<a href="javascript:void(0);" src="../../public/news/shuma/kuwan.htm" class="cs-navi-tab">导出题目</a></p>
+					<a href="javascript:void(0);" src="problem_add_page.php" class="cs-navi-tab">添加题目</a></p>
+					<a href="javascript:void(0);" src="problem_list.php" class="cs-navi-tab">更改题目</a></p>
+					<a href="javascript:void(0);" src="rejudge.php" class="cs-navi-tab">重判</a></p>
+					<a href="javascript:void(0);" src="problem_import.php" class="cs-navi-tab">导入题目</a></p>
+					<a href="javascript:void(0);" src="problem_export.php" class="cs-navi-tab">导出题目</a></p>
 				</div>
 				<div title="用户相关">
 					<a href="javascript:void(0);" src="changepass.php" class="cs-navi-tab">更改密码</a></p>

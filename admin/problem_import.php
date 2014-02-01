@@ -7,10 +7,7 @@
 	return $ret;
 }
 require_once("admin-header.php");
-if (!($_SESSION['user_id'] == "admin")){
-	echo "<a href='../index.php'>Please Login First!</a>";
-	exit(1);
-}
+
    $maxfile=min(ini_get("upload_max_filesize"),ini_get("post_max_size"));
 
 ?>

@@ -1,9 +1,5 @@
 <?php require("admin-header.php");
 require_once("../include/set_get_key.php");
-if (!($_SESSION['user_id'] == "admin")){
-	echo "<a href='../index.php'>Please Login First!</a>";
-	exit(1);
-}
 echo "<title>Privilege List</title>"; 
 echo "<center><h2>Privilege List</h2></center>";
 $sql="select * FROM privilege where rightstr in ('administrator','source_browser','contest_creator','http_judge','problem_editor') ";

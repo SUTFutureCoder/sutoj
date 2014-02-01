@@ -1,8 +1,4 @@
-<?php require_once("admin-header.php");
-if (!($_SESSION['user_id'] == "admin")){
-	echo "<a href='../index.php'>Please Login First!</a>";
-	exit(1);
-}
+<?php require("admin-header.php");
 ?>
 
 <form action='problem_export_xml.php' method=post>
@@ -13,7 +9,7 @@ if (!($_SESSION['user_id'] == "admin")){
 	<input type='hidden' name='do' value='do'>
 	<input type=submit name=submit value='Export'>
    <input type=submit value='Download'>
-   <?php require_once("../include/set_post_key.php");?>
+   <?php require("../include/set_post_key.php");?>
 </form>
 * from-to will working will empty IN <br>
 * if using IN,from-to will not working.<br>

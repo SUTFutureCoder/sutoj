@@ -84,7 +84,7 @@ function getSolution($pid,$lang){
 	$ret=new Solution();
 	require("../include/db_info.inc.php");
 	if(isset($OJ_LANG)){
-			require("../lang/$OJ_LANG.php");
+			require("../inc/en.php");
 	}
 	require("../include/const.inc.php");
          $con=false;
@@ -175,12 +175,6 @@ function fixImageURL(&$html,&$did){
 			 array_push($did,$img);
 		 }
    }   	
-}
-
-if (!  $_SESSION ['user_id']  == "admin") {
-	echo "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">";
-	echo "<a href='../index.php'>Please Login First!</a>";
-	exit ( 1 );
 }
 
 

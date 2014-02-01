@@ -1,9 +1,6 @@
-<?php require_once ("admin-header.php");
-require_once("../include/check_post_key.php");
-if (!($_SESSION['user_id'] == "admin")){
-	echo "<a href='../index.php'>Please Login First!</a>";
-	exit(1);
-}
+<?php require("admin-header.php");
+require("../include/check_post_key.php");
+
 ?>
 <?php function image_save_file($filepath ,$base64_encoded_img){
 	$fp=fopen($filepath ,"wb");
@@ -204,7 +201,7 @@ if ($_FILES ["fps"] ["error"] > 0) {
 	}
 	unlink ( $tempfile );
 	if($spid>0){
-		require_once("../include/set_get_key.php");
+		require("../include/set_get_key.php");
 		echo "<br><a class=blue href=contest_add.php?spid=$spid&getkey=".$_SESSION['getkey'].">Use these problems to create a contest.</a>";
 	 }
 }

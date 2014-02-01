@@ -2,10 +2,7 @@
  require_once("admin-header.php");
 ini_set("display_errors","On");
 require_once("../include/check_get_key.php");
-if (!($_SESSION['user_id'] == "admin")){
-        echo "<a href='../index.php'>Please Login First!</a>";
-        exit(1);
-}
+
 ?> 
 <?php
   if($OJ_SAE||function_exists('system')){

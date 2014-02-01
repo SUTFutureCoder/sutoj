@@ -4,37 +4,100 @@
 <meta http-equiv="Cache-Control" content="no-cache">
 <meta http-equiv="Content-Language" content="zh-cn">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel=stylesheet href='css/bootstrap.min.css' type='text/css'>
+<link rel=stylesheet href='css/bootstrap-responsive.min.css' type='text/css'>
 <title>New Problem</title>
 </head>
 <body leftmargin="30" >
+<?php require("admin-header.php");?>
+<?php require("../include/db_info.inc.php");?>
 
-<?php require_once("../include/db_info.inc.php");?>
-<?php require_once("admin-header.php");
-if (!($_SESSION['user_id'] == "admin"||isset($_SESSION['problem_editor']))){
-	echo "<a href='../index.php'>Please Login First!</a>";
-	exit(1);
-}
-?>
 <?php
-include_once("../fckeditor/fckeditor.php") ;
+include("../extra/fckeditor/fckeditor.php") ;
 ?>
-<h1 >Add New problem</h1>
+      <legend>添加题目</legend>
 
 <form method=POST action=problem_add.php>
-<input type=hidden name=problem_id value="New Problem">
-<p align=left>Problem Id:&nbsp;&nbsp;New Problem</p>
-<p align=left>Title:<input class="input input-xxlarge" type=text name=title size=71></p>
+
+<p align=left>Problem Id:<input type=text name=problem_id size=20 
+value=<?php 
+$sql = "SELECT MAX(problem_id) FROM problem";
+$result = mysql_query($sql);
+$row = mysql_fetch_array($result);
+if($row)
+echo ++$row[0];
+else
+echo 1001;
+?>><br>	<a style="color:red">之前已添加到<?php $pre_add = --$row[0];
+$sql = "SELECT * FROM contest WHERE contest_id = 0";
+$result = mysql_query($sql);
+$row = mysql_fetch_array($result);
+if(!$row['fresh']){
+	$num = 1000;
+	$pre_num = $pre_add % ( $row['problem_sum'] + $row['pre_problem_sum'] + 1);
+	if($pre_add > $num + $row['pre_problem_sum'])	
+		echo "正赛-第" . $pre_num . "题";
+	else
+		echo "热身赛-第" .  $pre_num . "题";
+}
+else{
+	$num = 1000;
+	if($pre_add <= $num + 2 * $row['problem_sum']){
+		if($pre_add <= $num + $row['problem_sum']){
+			$pre_num = $pre_add % ($row['problem_sum']);
+			if($pre_num)
+				echo "老生正赛-第" . $pre_num . "题";
+			else
+				echo "老生正赛-第" . $row['problem_sum'] . "题";
+		}
+		else{
+			$pre_num = $pre_add % ($row['problem_sum'] * 2);
+			if($pre_num)
+				echo "新生正赛-第" . $pre_num . "题";
+			else
+				echo "新生正赛-第" . $row['problem_sum'] . "题";
+		}
+	}
+	else{
+		if($pre_add <= $num + 2 * $row['problem_sum'] + $row['pre_problem_sum']){
+			$pre_num = ($pre_add - 2 * $row['problem_sum']) % ($row['pre_problem_sum']);
+			if($pre_num)
+				echo "老生热身赛-第" . $pre_num . "题";
+			else
+				echo "老生热身赛-第" . $row['pre_problem_sum'] . "题";
+			
+		}
+		else{
+			$pre_num = ($pre_add - 2 * $row['problem_sum'] - $row['pre_problem_sum']) % ($row['pre_problem_sum']);
+			if($pre_num)
+				echo "新生热身赛-第" . $pre_num . "题";
+			else
+				echo "新生热身赛-第" . $row['pre_problem_sum'] . "题";
+		}
+	}
+}
+echo "<br>";
+for($i = 1001; $i <= $pre_add; $i++){
+	$sql = "SELECT problem_id FROM problem WHERE problem_id = '$i'";
+	$result = mysql_query($sql);
+	$row = mysql_fetch_array($result);
+	if(!$row)
+		echo "请注意其中题号为" . $i . "尚未添加";
+}
+
+?></a><br>
+<p align=left>Title:<a style="color:red;"><?php $sort = 65; $sort += $pre_num; echo "  ". chr($sort) . ":"?></a><input class="input input-xxlarge" type=text name=title size=71></p>
 <p align=left>Time Limit:<input type=text name=time_limit size=20 value=1>S</p>
 <p align=left>Memory Limit:<input type=text name=memory_limit size=20 value=128>MByte</p>
 <p align=left>Description:<br><!--<textarea rows=13 name=description cols=80></textarea>-->
 
 <?php
 $description = new FCKeditor('description') ;
-$description->BasePath = '../fckeditor/' ;
+$description->BasePath = '../extra/fckeditor/' ;
 $description->Height = 250 ;
 $description->Width=800;
 
-$description->Value = '<p></p>' ;
+$description->Value = '' ;
 $description->Create() ;
 ?>
 </p>
@@ -43,11 +106,11 @@ $description->Create() ;
 
 <?php
 $input = new FCKeditor('input') ;
-$input->BasePath = '../fckeditor/' ;
+$input->BasePath = '../extra/fckeditor/' ;
 $input->Height = 250 ;
 $input->Width=800;
 
-$input->Value = '<p></p>' ;
+$input->Value = '' ;
 $input->Create() ;
 ?>
 </p>
@@ -58,11 +121,11 @@ $input->Create() ;
 
 <?php
 $output = new FCKeditor('output') ;
-$output->BasePath = '../fckeditor/' ;
+$output->BasePath = '../extra/fckeditor/' ;
 $output->Height = 250 ;
 $output->Width=800;
 
-$output->Value = '<p></p>' ;
+$output->Value = '' ;
 $output->Create() ;
 ?>
 
@@ -74,34 +137,21 @@ $output->Create() ;
 <p align=left>Hint:<br>
 <?php
 $output = new FCKeditor('hint') ;
-$output->BasePath = '../fckeditor/' ;
+$output->BasePath = '../extra/fckeditor/' ;
 $output->Height = 250 ;
 $output->Width=800;
 
-$output->Value = '<p></p>' ;
+$output->Value = '' ;
 $output->Create() ;
 ?>
 </p>
 <p>SpecialJudge: N<input type=radio name=spj value='0' checked>Y<input type=radio name=spj value='1'></p>
 <p align=left>Source:<br><textarea name=source rows=1 cols=70></textarea></p>
-<p align=left>contest:
-	<select  name=contest_id>
-<?php $sql="SELECT `contest_id`,`title` FROM `contest` WHERE `start_time`>NOW() order by `contest_id`";
-$result=mysql_query($sql);
-echo "<option value=''>none</option>";
-if (mysql_num_rows($result)==0){
-}else{
-	for (;$row=mysql_fetch_object($result);)
-		echo "<option value='$row->contest_id'>$row->contest_id $row->title</option>";
-}
-?>
-	</select>
-</p>
 <div align=center>
-<?php require_once("../include/set_post_key.php");?>
+<?php require("../include/set_post_key.php");?>
 <input type=submit value=Submit name=submit>
 </div></form>
 <p>
-<?php require_once("../inc/footer.php");?>
+
 </body></html>
 

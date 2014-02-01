@@ -1,11 +1,6 @@
 <?php require_once("admin-header.php");
 require_once("../include/check_get_key.php");
-if (!($_SESSION['user_id'] == "admin")){
-	echo "<a href='../index.php'>Please Login First!</a>";
-	exit(1);
-}
-?>
-<?php $id=intval($_GET['id']);
+$id=intval($_GET['id']);
 $sql="SELECT `defunct` FROM `problem` WHERE `problem_id`=$id";
 $result=mysql_query($sql);
 $row=mysql_fetch_row($result);

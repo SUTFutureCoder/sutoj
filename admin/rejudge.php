@@ -1,10 +1,9 @@
+<link rel=stylesheet href='css/bootstrap.min.css' type='text/css'>
+<link rel=stylesheet href='css/bootstrap-responsive.min.css' type='text/css'>
+
 <?php require("admin-header.php");
 
-if (!($_SESSION['user_id'] == "admin")){
-	echo "<a href='../index.php'>Please Login First!</a>";
-	exit(1);
-}?>
-<?php if(isset($_POST['do'])){
+ if(isset($_POST['do'])){
 	require_once("../include/check_post_key.php");
 	if (isset($_POST['rjpid'])){
 		$rjpid=intval($_POST['rjpid']);
@@ -28,7 +27,7 @@ if (!($_SESSION['user_id'] == "admin")){
 	}
 }
 ?>
-<b>Rejudge</b>
+<legend>重判</legend>
 	<ol>
 	<li>Problem
 	<form action='rejudge.php' method=post>

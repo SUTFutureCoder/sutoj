@@ -1,12 +1,5 @@
 <?php require("admin-header.php");
 require_once("../include/set_get_key.php");
-if (!($_SESSION['user_id'] == "admin"
-                ||isset($_SESSION['contest_creator'])
-                ||isset($_SESSION['problem_editor'])
-                )){
-        echo "<a href='../index.php'>Please Login First!</a>";
-        exit(1);
-}
 
 $sql="SELECT max(`problem_id`) as upid FROM `problem`";
 $page_cnt=50;
@@ -35,40 +28,37 @@ $sql="select `problem_id`,`title`,`in_date`,`defunct` FROM `problem` where probl
 $result=mysql_query($sql) or die(mysql_error());
 echo "<center><table width=90% border=1>";
 echo "<form method=post action=contest_add.php>";
-echo "<tr><td colspan=7><input type=submit name='problem2contest' value='CheckToNewContest'>";
+
 echo "<tr><td>PID<td>Title<td>Date";
-if($_SESSION['user_id'] == "admin"||isset($_SESSION['problem_editor'])){
+
         if($_SESSION['user_id'] == "admin")   echo "<td>Status<td>Delete";
-        echo "<td>Edit<td>TestData</tr>";
-}
+        echo "<td>状态<td>删除<td>编辑<td>测试数据</tr>";
+
 for (;$row=mysql_fetch_object($result);){
         echo "<tr>";
         echo "<td>".$row->problem_id;
         echo "<input type=checkbox name='pid[]' value='$row->problem_id'>";
         echo "<td><a href='../problem.php?id=$row->problem_id'>".$row->title."</a>";
         echo "<td>".$row->in_date;
-        if($_SESSION['user_id'] == "admin"||isset($_SESSION['problem_editor'])){
-                if($_SESSION['user_id'] == "admin"){
-                        echo "<td><a href=problem_df_change.php?id=$row->problem_id&getkey=".$_SESSION['getkey'].">"
+
+	 echo "<td><a href=problem_df_change.php?id=$row->problem_id&getkey=".$_SESSION['getkey'].">"
                         .($row->defunct=="N"?"<span titlc='click to reserve it' class=green>Available</span>":"<span class=red title='click to be available'>Reserved</span>")."</a><td>";
-                        if($OJ_SAE||function_exists("system")){
+     if($OJ_SAE||function_exists("system")){
                               ?>
                               <a href=# onclick='javascript:if(confirm("Delete?")) location.href="problem_del.php?id=<?php echo $row->problem_id?>&getkey=<?php echo $_SESSION['getkey']?>";'>
                               Delete</a>
                               <?php
                         }
-                }
-                if($_SESSION['user_id'] == "admin"||isset($_SESSION["p".$row->problem_id])){
+                
                         echo "<td><a href=problem_edit.php?id=$row->problem_id&getkey=".$_SESSION['getkey'].">Edit</a>";
-                        echo "<td><a href=quixplorer/index.php?action=list&dir=$row->problem_id&order=name&srt=yes>TestData</a>";
-                }
-        }
+                        echo "<td><a href=../problem.php?id=$row->problem_id>TestData</a>";
+                
+        
         echo "</tr>";
 }
-echo "<tr><td colspan=7><input type=submit name='problem2contest' value='CheckToNewContest'>";
-echo "</tr></form>";
+
+echo "</form>";
 echo "</table></center>";
-require("../inc/footer.php");
 ?>
 									 
 									 
