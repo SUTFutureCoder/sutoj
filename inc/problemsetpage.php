@@ -14,22 +14,31 @@ $(document).ready(function()
 <?PHP
 
 if($_SESSION['U'] -> getAut() != "admin")
-{		
+{	
+	if($_SESSION['C'] -> getPre() && $occurtime < $_SESSION['C'] -> getP_S_time()){
+		echo "</br></br><h1 style=\"color:blue\">热身赛尚未开始，敬请期待" . $_SESSION['C'] -> getP_S_time() ."</h1></br></br></br></br></br>";
+		require("bodyfooter.php");
+		exit(0);
+	}
 	
+	if($_SESSION['C'] -> getPre() && $occurtime > $_SESSION['C'] -> getP_E_time() && $occurtime <= $_SESSION['C'] -> getS_time()){
+		echo "</br></br><h1 style=\"color:blue\">热身赛已经结束，感谢您的参与！<br><br>敬请期待正赛" . $_SESSION['C'] -> getP_S_time() . "</h1></br></br></br></br></br>";
+		require("bodyfooter.php");
+		exit(0);
+	}	
 
-	if(($occurtime < $contesttime['pre_start_time'] && $contesttime['pre']) || ($occurtime < $contesttime['start_time'] && !$contesttime['pre']))
-	{
-	echo "</br></br><h1 style=\"color:blue\">比赛尚未开始，敬请期待". $conteststart['pre_start_time']  ."</h1></br></br></br></br></br>";
-	require("bodyfooter.php");
-exit(0);
+	if(!$_SESSION['C'] -> getPre() && $occurtime < $_SESSION['C'] -> getS_time()){
+		echo "</br></br><h1 style=\"color:blue\">比赛尚未开始，敬请期待" . $_SESSION['C'] -> getS_time() . "</h1></br></br></br></br></br>";
+		require("bodyfooter.php");
+		exit(0);
 	}
-	if(($occurtime > $contesttime['pre_end_time'] && $contesttime['pre']) || ($occurtime > $contesttime['end_time'] && !$contesttime['pre']))
-	{
-	echo "</br></br><h1 style=\"color:blue\">比赛已经结束，感谢您的关注！</h1></br></br></br></br></br>";
-	require("bodyfooter.php");
-exit(0);
+		
+	if(!$_SESSION['C'] -> getPre() && $occurtime >= $_SESSION['C'] -> getE_time()){
+		echo "</br></br><h1 style=\"color:blue\">比赛已经结束，感谢您的关注！</h1></br></br></br></br></br>";
+		require("bodyfooter.php");
+		exit(0);
 	}
-
+	
 }
 
 

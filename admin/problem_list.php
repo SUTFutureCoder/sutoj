@@ -1,5 +1,7 @@
+<link rel=stylesheet href='css/bootstrap.min.css' type='text/css'>
+<link rel=stylesheet href='css/bootstrap-responsive.min.css' type='text/css'>
 <?php require("admin-header.php");
-require_once("../include/set_get_key.php");
+require("../include/set_get_key.php");
 
 $sql="SELECT max(`problem_id`) as upid FROM `problem`";
 $page_cnt=50;

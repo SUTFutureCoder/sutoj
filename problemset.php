@@ -111,11 +111,12 @@ while ($row=mysql_fetch_object($result)){
 
 	$occurtime = date("Y-m-d H:i:s");
 	
-	$sql = "SELECT * FROM  `contest` WHERE  `contest_id` =0";//比赛时间
-	$result = mysql_query($sql);
-	$contesttime = mysql_fetch_array($result);
+	//$sql = "SELECT * FROM  `contest` WHERE  `contest_id` =0";//比赛时间
+	//$result = mysql_query($sql);
+	//$row = mysql_fetch_array($result);
 
 	if($_SESSION['U'] -> getAut() == "admin"){ //admin后门
+
 	for($i = 0; $i < 26; $i++ ){
 	$problemset[$i][1]="<div class='center'>".$problem."</div>";
 	$view_problemset[$i][0] = $problemset[$i][0];
@@ -128,9 +129,9 @@ while ($row=mysql_fetch_object($result)){
 	require("inc/problemsetpage.php");
 	exit(0);
 	}
-if($occurtime >= $contesttime['start_time'] && $occurtime <= $contesttime['end_time'] && !$contesttime['pre']){
-	for($i = 0; $i < 8; $i++ ){
-	if(!$_SESSION['U'] -> getF_test())
+if($occurtime >= $_SESSION['C'] -> getS_time() && $occurtime <= $_SESSION['C'] -> getE_time() && !$_SESSION['C'] -> getPre() && $_SESSION['C'] -> getFresh()){	//存在新生组 && 非热身
+	for($i = 0; $i < $_SESSION['C'] -> getP_sum(); $i++ ){	
+	if(!$_SESSION['U'] -> getF_test())	//老生
 	{
 	$problemset[$i][1]="<div class='center'>".$problem."</div>";
 	$view_problemset[$i][0] = $problemset[$i][0];
@@ -139,36 +140,36 @@ if($occurtime >= $contesttime['start_time'] && $occurtime <= $contesttime['end_t
 	$view_problemset[$i][3] = $problemset[$i][3];
 	$problem++;
 	}
-	else
+	else	//新生
 	{
 	$problemset[$i][1]="<div class='center'>".$problem."</div>";
-	$view_problemset[$i][0] = $problemset[$i + 8][0];
+	$view_problemset[$i][0] = $problemset[$i + $_SESSION['C'] -> getP_sum()][0];
 	$view_problemset[$i][1] = $problemset[$i][1];
-	$view_problemset[$i][2] = $problemset[$i + 8][2];
-	$view_problemset[$i][3] = $problemset[$i + 8][3];
+	$view_problemset[$i][2] = $problemset[$i + $_SESSION['C'] -> getP_sum()][2];
+	$view_problemset[$i][3] = $problemset[$i + $_SESSION['C'] -> getP_sum()][3];
 	$problem++;
 	}
 	}
 }
 
-if($occurtime >= $contesttime['pre_start_time'] && $occurtime <= $contesttime['pre_end_time']  && $contesttime['pre']){
-	for($i = 0; $i < 5; $i++ ){
+if($occurtime >= $_SESSION['C'] -> getP_S_time() && $occurtime <= $_SESSION['C'] -> getP_E_time()  && $_SESSION['C'] -> getPre()){	//热身赛
+	for($i = 0; $i < $_SESSION['C'] -> getP_P_sum(); $i++ ){
 	if(!$_SESSION['U'] -> getF_test())
 	{
 	$problemset[$i][1]="<div class='center'>".$problem."</div>";
-	$view_problemset[$i][0] = $problemset[$i + 16][0];
+	$view_problemset[$i][0] = $problemset[$i + ($_SESSION['C'] -> getP_sum() * pow(2, $_SESSION['C'] -> getFresh()))][0];
 	$view_problemset[$i][1] = $problemset[$i][1];
-	$view_problemset[$i][2] = $problemset[$i + 16][2];
-	$view_problemset[$i][3] = $problemset[$i + 16][3];
+	$view_problemset[$i][2] = $problemset[$i + ($_SESSION['C'] -> getP_sum() * pow(2, $_SESSION['C'] -> getFresh()))][2];
+	$view_problemset[$i][3] = $problemset[$i + ($_SESSION['C'] -> getP_sum() * pow(2, $_SESSION['C'] -> getFresh()))][3];
 	$problem++;
 	}
 	else
 	{
 	$problemset[$i][1]="<div class='center'>".$problem."</div>";
-	$view_problemset[$i][0] = $problemset[$i + 21][0];
+	$view_problemset[$i][0] = $problemset[$i + ($_SESSION['C'] -> getP_sum() * pow(2, $_SESSION['C'] -> getFresh()) + $_SESSION['C'] -> getP_P_sum())][0];
 	$view_problemset[$i][1] = $problemset[$i][1];
-	$view_problemset[$i][2] = $problemset[$i + 21][2];
-	$view_problemset[$i][3] = $problemset[$i + 21][3];
+	$view_problemset[$i][2] = $problemset[$i + ($_SESSION['C'] -> getP_sum() * pow(2, $_SESSION['C'] -> getFresh()) + $_SESSION['C'] -> getP_P_sum())][2];
+	$view_problemset[$i][3] = $problemset[$i + ($_SESSION['C'] -> getP_sum() * pow(2, $_SESSION['C'] -> getFresh()) + $_SESSION['C'] -> getP_P_sum())][3];
 	$problem++;
 	}
 }

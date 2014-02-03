@@ -11,7 +11,6 @@
 	$description="";
  	if (isset($_POST['syear']))
 {	
-	require("../include/db_info.inc.php");
 	require("../include/check_post_key.php");
 	
 	$starttime=intval($_POST['syear'])."-".intval($_POST['smonth'])."-".intval($_POST['sday'])." ".intval($_POST['shour']).":".intval($_POST['sminute']).":00";

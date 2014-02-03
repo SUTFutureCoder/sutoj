@@ -6,17 +6,15 @@
         $view_title= $MSG_CONTEST.$MSG_RANKLIST;
         $title="";
 	$occurtime = date("Y-m-d H:i:s");	
-	$sql = "SELECT * FROM  `contest` WHERE  `contest_id` = 0 ";
-	$result = mysql_query($sql);
-	$contest = mysql_fetch_array($result);
+
 
 if($_SESSION['U'] -> getF_test())
-	if($occurtime < $contest['start_time'])
+	if($occurtime < $_SESSION['C'] -> getS_time())
 	$_GET['cid'] = "3";	//新生热身赛模拟比赛号为3
 	else
 	$_GET['cid'] = "1";	//新生正赛模拟比赛号为1
 else
-	if($occurtime < $contest['start_time'])
+	if($occurtime < $_SESSION['C'] -> getS_time())
 	$_GET['cid'] = "2";	//老生热身赛模拟比赛号为2
 	else
 	$_GET['cid'] = "0";	//老生正赛模拟比赛号为0
@@ -65,7 +63,7 @@ function s_cmp($A,$B){
 if (!isset($_GET['cid'])) die("No Such Contest!");
 $cid=intval($_GET['cid']);
 
-
+$sql = "SELECT * FROM  `contest` WHERE  `contest_id` = 0 ";
 //$result=mysql_query($sql) or die(mysql_error());
 //$rows_cnt=mysql_num_rows($result);
 if($OJ_MEMCACHE){

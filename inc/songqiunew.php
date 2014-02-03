@@ -21,27 +21,7 @@ exit(0);
 
     require('turnid.php');
 
-	
-	$occurtime = date("Y-m-d H:i:s");
-	$sql = "SELECT * FROM  `contest` WHERE  `contest_id` = 0";
-	$result= mysql_query($sql);
-	$conteststart=mysql_fetch_array($result);
-	//echo $conteststart['start_time'];
-
-	if(($occurtime < $conteststart['start_time'] && !$conteststart['pre']) || ($occurtime < $conteststart['pre_start_time'] && $conteststart['pre']))
-	{
-	echo "</br></br><h1 style=\"color:blue\">比赛尚未开始，敬请期待". $conteststart['start_time']  ."</h1></br></br></br></br></br>";
-exit(0);
-	}
-	if(($occurtime > $conteststart['end_time'] && !$conteststart['pre']) || ($occurtime > $conteststart['pre_end_time'] && $conteststart['pre']))
-	{
-	echo "</br></br><h1 style=\"color:blue\">比赛已经结束，感谢您的关注！</h1></br></br></br></br></br>";
-
-exit(0);
-	}
-	
-
-	?>
+?>
 <div class="marquee" ><marquee scrollamount="2" width=100% scrolldelay="40" onmouseover="javascript:this.stop();" onmouseout="javascript:this.start();"><b style="margin-right:20px"><br/>
 <a href="#" style="color:red"><?PHP
 

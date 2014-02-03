@@ -139,12 +139,9 @@ $footer = "								   <div id=\"result\">
 </html>";
 
 	$occurtime = date("Y-m-d H:i:s");
-	$sql = "SELECT * FROM  `contest` WHERE  `contest_id` =201311";
-	$result= mysql_query($sql);
-	$regstart=mysql_fetch_array($result);
-	//echo $conteststart['start_time'];
 
-	if( $occurtime > $regstart['start_time'])
+
+	if( $occurtime > $_SESSION['C'] -> getS_time())
 	{
 	echo "</br></br><h1 style=\"color:blue\">比赛已经开始，无法修改信息</h1></br></br></br></br></br>";
 	echo "<div>

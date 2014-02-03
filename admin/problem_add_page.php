@@ -9,10 +9,7 @@
 <title>New Problem</title>
 </head>
 <body leftmargin="30" >
-<?php require("admin-header.php");?>
-<?php require("../include/db_info.inc.php");?>
-
-<?php
+<?php require("admin-header.php");
 include("../extra/fckeditor/fckeditor.php") ;
 ?>
       <legend>添加题目</legend>
@@ -21,62 +18,78 @@ include("../extra/fckeditor/fckeditor.php") ;
 
 <p align=left>Problem Id:<input type=text name=problem_id size=20 
 value=<?php 
-$sql = "SELECT MAX(problem_id) FROM problem";
-$result = mysql_query($sql);
-$row = mysql_fetch_array($result);
-if($row)
-echo ++$row[0];
+$P_max = $_SESSION['C'] -> getP_max(); 
+if($P_max)
+echo ++$P_max;
 else
 echo 1001;
-?>><br>	<a style="color:red">之前已添加到<?php $pre_add = --$row[0];
-$sql = "SELECT * FROM contest WHERE contest_id = 0";
-$result = mysql_query($sql);
-$row = mysql_fetch_array($result);
-if(!$row['fresh']){
+?>><br>	<a style="color:red"><?php 
+$pre_add = --$P_max;
+
+if(!$_SESSION['C'] -> getFresh()){
+	echo "之前已添加到";
 	$num = 1000;
-	$pre_num = $pre_add % ( $row['problem_sum'] + $row['pre_problem_sum'] + 1);
-	if($pre_add > $num + $row['pre_problem_sum'])	
-		echo "正赛-第" . $pre_num . "题";
+	$pre_num = $pre_add % ( $_SESSION['C'] -> getP_sum() + $_SESSION['C'] -> getP_P_sum() + 1);
+	if($pre_add > $num + $_SESSION['C'] -> getP_P_sum())	
+		echo "正赛-第" . $pre_num . "题 -> " . $pre_add;
 	else
-		echo "热身赛-第" .  $pre_num . "题";
+		echo "热身赛-第" .  $pre_num . "题 -> " . $pre_add;
 }
 else{
+	echo "之前已添加到";
 	$num = 1000;
-	if($pre_add <= $num + 2 * $row['problem_sum']){
-		if($pre_add <= $num + $row['problem_sum']){
-			$pre_num = $pre_add % ($row['problem_sum']);
+	if($pre_add <= $num + 2 * $_SESSION['C'] -> getP_sum()){
+		if($pre_add <= $num + $_SESSION['C'] -> getP_sum()){
+			$pre_num = $pre_add % ($_SESSION['C'] -> getP_sum());
 			if($pre_num)
-				echo "老生正赛-第" . $pre_num . "题";
+				echo "老生正赛-第" . $pre_num . "题 -> " . $pre_add;
 			else
-				echo "老生正赛-第" . $row['problem_sum'] . "题";
+				echo "老生正赛-第" . $_SESSION['C'] -> getP_sum() . "题 -> " . $pre_add;
 		}
 		else{
-			$pre_num = $pre_add % ($row['problem_sum'] * 2);
+			$pre_num = $pre_add % ($_SESSION['C'] -> getP_sum() * 2);
 			if($pre_num)
-				echo "新生正赛-第" . $pre_num . "题";
+				echo "新生正赛-第" . $pre_num . "题 -> " . $pre_add;
 			else
-				echo "新生正赛-第" . $row['problem_sum'] . "题";
+				echo "新生正赛-第" . $_SESSION['C'] -> getP_sum() . "题 -> " . $pre_add;
 		}
 	}
 	else{
-		if($pre_add <= $num + 2 * $row['problem_sum'] + $row['pre_problem_sum']){
-			$pre_num = ($pre_add - 2 * $row['problem_sum']) % ($row['pre_problem_sum']);
+		if($pre_add <= $num + 2 * $_SESSION['C'] -> getP_sum() + $_SESSION['C'] -> getP_P_sum()){
+			$pre_num = ($pre_add - 2 * $_SESSION['C'] -> getP_sum()) % ($_SESSION['C'] -> getP_P_sum());
 			if($pre_num)
-				echo "老生热身赛-第" . $pre_num . "题";
+				echo "老生热身赛-第" . $pre_num . "题 -> " . $pre_add;
 			else
-				echo "老生热身赛-第" . $row['pre_problem_sum'] . "题";
+				echo "老生热身赛-第" . $_SESSION['C'] -> getP_P_sum() . "题 -> " . $pre_add;
 			
 		}
 		else{
-			$pre_num = ($pre_add - 2 * $row['problem_sum'] - $row['pre_problem_sum']) % ($row['pre_problem_sum']);
+			$pre_num = ($pre_add - 2 * $_SESSION['C'] -> getP_sum() - $_SESSION['C'] -> getP_P_sum()) % ($_SESSION['C'] -> getP_P_sum());
 			if($pre_num)
-				echo "新生热身赛-第" . $pre_num . "题";
+				echo "新生热身赛-第" . $pre_num . "题 -> " . $pre_add;
 			else
-				echo "新生热身赛-第" . $row['pre_problem_sum'] . "题";
+				echo "新生热身赛-第" . $_SESSION['C'] -> getP_P_sum() . "题 -> " . $pre_add;
 		}
-	}
 }
+
 echo "<br>";
+
+if(($_SESSION['C'] -> getP_max() >= (1000 + $_SESSION['C'] -> getP_sum() + $_SESSION['C'] -> getP_P_sum()) && !$_SESSION['C'] -> getFresh()) || (($_SESSION['C'] -> getP_max() >= (1000 + ($_SESSION['C'] -> getP_sum() + $_SESSION['C'] -> getP_P_sum()) * 2) && $_SESSION['C'] -> getFresh()))){
+	echo "注意！题号已溢出或已满。请检查以下控制面板自动生成的提示信息！<br>";
+	echo "当前已添加的最大题号 -> " . $_SESSION['C'] -> getP_max();
+	echo " 设定的正赛题数 -> " . $_SESSION['C'] -> getP_sum();
+	echo " 设定的热身赛题数 -> " . $_SESSION['C'] -> getP_P_sum();
+	echo " 是否添加新生组，是-1、否-0 -> " . $_SESSION['C'] -> getFresh();
+	echo "<br>";
+	echo "<br>";
+	echo "理论的最大题数 -> " . ( ($_SESSION['C'] -> getP_sum() + $_SESSION['C'] -> getP_P_sum() ) * pow(2, $_SESSION['C'] -> getFresh()) + 1000);
+	echo "<br>如需更改，请点击左侧的【更改比赛信息】";
+	echo "<br>";
+
+}
+
+
+}
 for($i = 1001; $i <= $pre_add; $i++){
 	$sql = "SELECT problem_id FROM problem WHERE problem_id = '$i'";
 	$result = mysql_query($sql);

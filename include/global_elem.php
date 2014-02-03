@@ -8,7 +8,7 @@ class Global_elem{
 	const AUTHOR = "SUT ACM TEAM";
 	const KEYWORDS = "sut,acm,acm-icpc,沈阳工业大学,Shenyang University Of Technology";	
 	function get_title($title,$domain="沈阳工业大学ACM"){return $title.'-'.$domain;}	
-	function get_copyright($Y){return  "Shenyang University Of Technology \nOnline Judge 14.04LTS \nver:Hummingbird \nCopyright 2010-".$Y." \n© SUT ACM TEAM \nPowered By hustoj \nAll Copyright Reserved \nGPL2.0 2011 ";}
+	function get_copyright($Y){return  "Shenyang University Of Technology \nOnline Judge 14.04LTS \nver:Hummingbird \nCopyright 2010-".$Y." \n© SUT ACM TEAM \nPowered By SUTACM LAB. & hustoj \nAll Copyright Reserved \nGPL2.0 2011 ";}
 }
 ?>
 

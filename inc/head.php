@@ -1,6 +1,7 @@
 ﻿<?php
 header("Content-Type: text/html; charset=utf-8");
 require("include/user.class.php");
+require("include/contest.class.php");
 //@session_start(); 
 require("include/db_info.inc.php");
 

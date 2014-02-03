@@ -1,6 +1,5 @@
 <?php require("admin-header.php");
 require("../include/check_post_key.php");
-require("../include/db_info.inc.php");
 require("../include/problem.php");
 // contest_id
 

@@ -4,7 +4,7 @@
 <?php require("admin-header.php");
 
  if(isset($_POST['do'])){
-	require_once("../include/check_post_key.php");
+	require("../include/check_post_key.php");
 	if (isset($_POST['rjpid'])){
 		$rjpid=intval($_POST['rjpid']);
 		$sql="UPDATE `solution` SET `result`=1 WHERE `problem_id`=".$rjpid;

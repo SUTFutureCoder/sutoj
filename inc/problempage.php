@@ -3,21 +3,27 @@
 	if($_SESSION['U'] -> getAut() != "admin")
 	{
 		$occurtime = date("Y-m-d H:i:s");
-		$sql = "SELECT * FROM  `contest` WHERE  `contest_id` = 0";
-		$result= mysql_query($sql);
-		$contesttime=mysql_fetch_array($result);
-		//echo $conteststart['start_time'];
-		if(($occurtime < $contesttime['start_time'] && !$contesttime['pre']) || ($occurtime < $contesttime['pre_start_time'] && $contesttime['pre']) )
-		{
-			echo "</br></br><h1 style=\"color:blue\">比赛尚未开始，敬请期待". $conteststart['start_time']  ."</h1></br></br></br></br></br>";
-			goto end;
-		}
-		if(($occurtime >= $contesttime['end_time'] && !$contesttime['pre']) || ($occurtime >= $contesttime['pre_end_time'] && $contesttime['pre']) )
-		{
+
+		if($_SESSION['C'] -> getPre() && $occurtime < $_SESSION['C'] -> getP_S_time()){
+		echo "</br></br><h1 style=\"color:blue\">热身赛尚未开始，敬请期待" . $_SESSION['C'] -> getP_S_time() . "</h1></br></br></br></br></br>";
+		goto end;
+	}
+	
+	if($_SESSION['C'] -> getPre() && $occurtime > $_SESSION['C'] -> getP_E_time() && $occurtime <= $_SESSION['C'] -> getP_S_time()){
+		echo "</br></br><h1 style=\"color:blue\">热身赛已经结束，感谢您的参与！敬请期待正赛" . $_SESSION['C'] -> getP_S_time() . "</h1></br></br></br></br></br>";
+		goto end;
+	}	
+
+	if(!$_SESSION['C'] -> getPre() && $occurtime < $_SESSION['C'] -> getS_time()){
+		echo "</br></br><h1 style=\"color:blue\">比赛尚未开始，敬请期待" . $_SESSION['C'] -> getS_time() . "</h1></br></br></br></br></br>";
+		goto end;
+	}
+		
+	if(!$_SESSION['C'] -> getPre() && $occurtime >= $_SESSION['C'] -> getE_time()){
 		echo "</br></br><h1 style=\"color:blue\">比赛已经结束，感谢您的关注！</h1></br></br></br></br></br>";
 		goto end;
-		}
 	}
+}
 
 	if ($pr_flag){
 		echo "<title>$MSG_PROBLEM $row->problem_id. -- $row->title</title>";

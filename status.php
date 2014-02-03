@@ -11,14 +11,14 @@ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Date in the past
 	
 	
 if($occurtime < $contesttime['start_time']){
-	$sql_lock="SELECT `pre_start_time`,`title`,`pre_end_time` FROM `contest` WHERE `contest_id`= 1";
+	$sql_lock="SELECT `pre_start_time`,`title`,`pre_end_time` FROM `contest` WHERE `contest_id`= 0";
 	if($_SESSION['U'] -> getF_test())
 	$_POST['cid'] = "3";	//新生热身赛模拟比赛号为3
 	else
 	$_POST['cid'] = "2";	//老生热身赛模拟比赛号为2
 }
 else{
-	$sql_lock="SELECT `start_time`,`title`,`end_time` FROM `contest` WHERE `contest_id`= 1";
+	$sql_lock="SELECT `start_time`,`title`,`end_time` FROM `contest` WHERE `contest_id`= 0";
 	if($_SESSION['U'] -> getF_test())
 	$_POST['cid'] = "1";	//新生正赛模拟比赛号为1
 	else

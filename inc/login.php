@@ -3,6 +3,7 @@
 <?php 
     require("../include/db_info.inc.php");
     require("../include/user.class.php");
+    require("../include/contest.class.php");
 	$view_title= "LOGIN";
 	if (isset($_SESSION['U'])){
 	echo "<a href=logout.php>Please logout First!</a>";
@@ -62,9 +63,15 @@
     	$result = mysql_query($sql);
     	$row = mysql_fetch_array($result);
     	    	
-    	$_SESSION['U'] = new User($row['team_id'], $row['user_id'], $row['team_number1'], $row['team_member1'], $row['team_number2'], $row['team_member2'], $row['team_number3'], $row['team_member3'], $row['team_telephone'], $row['freshman_contest'], $row['submit'], $row['solved'], $row['defunct'], $row['ip'], $row['accesstime'], $row['volume'], $row['language'], $row['reg_time'], $row['nick'], $row['authorizee']);    
+    	$_SESSION['U'] = new User($row['team_id'], $row['user_id'], $row['team_number1'], $row['team_member1'], $row['team_number2'], $row['team_member2'], $row['team_number3'], $row['team_member3'], $row['team_telephone'], $row['freshman_contest'], $row['submit'], $row['solved'], $row['defunct'], $row['ip'], $row['accesstime'], $row['volume'], $row['language'], $row['reg_time'], $row['nick'], $row['authorizee']);   
     	
-		echo mysql_error();
+    	$sql = "SELECT * FROM contest WHERE contest_id = 0";
+    	$result = mysql_query($sql);
+    	$row = mysql_fetch_array($result);
+    	
+    	$_SESSION['C'] = new Contest($row['contest_id'], $row['title'], $row['start_time'], $row['end_time'], $row['pre_start_time'], $row['pre_end_time'], $row['defunct'], $row['pre'], $row['fresh'], $row['problem_sum'], $row['pre_problem_sum'], $row['private']); 
+
+		
 		while ($result&&$row=mysql_fetch_assoc($result))
 			$_SESSION[$row['rightstr']]=true;
 		echo "<script language='javascript'>\n";

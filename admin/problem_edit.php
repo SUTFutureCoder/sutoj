@@ -8,7 +8,6 @@
 <body>
 <?php
 require("admin-header.php");
-require("../include/db_info.inc.php");
 include("../extra/fckeditor/fckeditor.php");
 ?>
 <legend>编辑题目</legend>
@@ -29,11 +28,6 @@ $row=mysql_fetch_object($result);
 <p>Time Limit:<input type=text name=time_limit size=20 value='<?php echo $row->time_limit?>'>S</p>
 <p>Memory Limit:<input type=text name=memory_limit size=20 value='<?php echo $row->memory_limit?>'>MByte</p>
 
-<!--
-<p>Description:<br><textarea rows=13 name=description cols=120><?php echo htmlspecialchars($row->description)?></textarea></p>
-<p>Input:<br><textarea rows=13 name=input cols=120><?php echo htmlspecialchars($row->input)?></textarea></p>
-<p>Output:<br><textarea rows=13 name=output cols=120><?php echo htmlspecialchars($row->output)?></textarea></p>
--->
 <p align=left>Description:<br><!--<textarea rows=13 name=description cols=80></textarea>-->
 
 <?php
