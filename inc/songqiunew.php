@@ -7,6 +7,7 @@
 <body>
 <?php
 require("../include/user.class.php");
+require("../include/contest.class.php");
 require('../include/db_info.inc.php');
 //echo $_SESSION['authorizee'];
 if(@$_SESSION['U'] -> getAut() != "Volunteer")

@@ -79,19 +79,23 @@ for ($i=0;$i<$user_cnt;$i++){
 	else echo "<tr class=evenrow align=center>\n";
 
 
-	if($rank >= 1 && $rank <= 3)	
-	echo "<td style=\"color:red;	background-color:#FFFF00;\">";
-	if(($rank >= 4 && $rank <= 12 && !$_SESSION['U'] -> getF_test()) || ($rank >= 4 && $rank <= 9 && $_SESSION['U'] -> getF_test()))
+	if(($rank >= 1 && $rank <= $_SESSION['C'] -> getGold()) || ($rank >= 1 && $rank <= $_SESSION['C'] -> getF_gold())){	
+		echo "<td style=\"color:red;	background-color:#FFFF00;\">";
+	}
+	if(($rank > $_SESSION['C'] -> getGold() && $rank <= ($_SESSION['C'] -> getGold() + $_SESSION['C'] -> getSilver()) && !$_SESSION['U'] -> getF_test()) || ($rank > $_SESSION['C'] -> getF_gold() && $rank <= ($_SESSION['C'] -> getF_gold() + $_SESSION['C'] -> getF_silver()) && $_SESSION['U'] -> getF_test()))
 	echo "<td style=\"color:red;	background-color:#CCCCCC;\">";
-	if(($rank >= 13 && $rank <= 30 && !$_SESSION['U'] -> getF_test()) || ($rank >= 10 && $rank <= 18 && $_SESSION['U'] -> getF_test()))
+	if(($rank > ($_SESSION['C'] -> getGold() + $_SESSION['C'] -> getSilver()) && $rank <= ($_SESSION['C'] -> getGold() + $_SESSION['C'] -> getSilver() + $_SESSION['C'] -> getCopper()) && !$_SESSION['U'] -> getF_test()) || ($rank > ($_SESSION['C'] -> getF_gold() + $_SESSION['C'] -> getF_silver()) && $rank <= ($_SESSION['C'] -> getF_gold() + $_SESSION['C'] -> getF_silver() + $_SESSION['C'] -> getF_copper()) && $_SESSION['U'] -> getF_test()))
 	echo "<td style=\"color:red;	background-color:#FF9933;\">";
-	if(($rank >30 && !$_SESSION['U'] -> getF_test()) || ($rank >18 && $_SESSION['U'] -> getF_test()))
+	if(($rank > ($_SESSION['C'] -> getGold() + $_SESSION['C'] -> getSilver() + $_SESSION['C'] -> getCopper()) && !$_SESSION['U'] -> getF_test()) || ($rank > ($_SESSION['C'] -> getF_gold() + $_SESSION['C'] -> getF_silver() + $_SESSION['C'] -> getF_copper()) && $_SESSION['U'] -> getF_test()))
 	echo "<td style=\"color:red;	\">";
 
 	if($rank == 1)
-	{echo "Winner";	$uuid=$U[$i]->user_id; $nick=$U[$i]->nick;
- 		if($nick[0]!="*")
-			$rank++;
+	{
+ 		if($nick[0]!="*"){
+ 			echo "Winner";
+ 			$uuid=$U[$i]->user_id;
+ 			$nick=$U[$i]->nick;
+			$rank++;}
 		else 
 			echo "*";
  	goto a;}

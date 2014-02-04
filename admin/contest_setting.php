@@ -25,6 +25,12 @@
 	$contest = $_POST['contest'];
 	$fresh = $_POST['fresh'];
 	$balloon = $_POST['balloon'];
+	$gold = $_POST['gold'];
+	$silver = $_POST['silver'];
+	$copper = $_POST['copper'];
+	$fresh_gold = $_POST['f_gold'];
+	$fresh_silver = $_POST['f_silver'];
+	$fresh_copper = $_POST['f_copper'];
 
 	if (get_magic_quotes_gpc ()){
     	$title = stripslashes ($title);
@@ -34,6 +40,12 @@
 		$contest = stripslashes ($contest);
 		$fresh = stripslashes($fresh);
 		$balloon = stripslashes($balloon);
+		$gold = stripslashes($gold);
+		$silver = stripslashes($silver);
+		$copper = stripslashes($copper);
+		$fresh_gold = stripslashes($fresh_gold);
+		$fresh_silver = stripslashes($fresh_silver);
+		$fresh_copper = stripslashes($fresh_copper);
      }
 
 	$title=mysql_real_escape_string($title);
@@ -43,9 +55,15 @@
 	$contest = mysql_real_escape_string($contest);
 	$fresh = mysql_real_escape_string($fresh);
 	$balloon = mysql_real_escape_string($balloon);
+	$gold = mysql_real_escape_string($gold);
+	$silver = mysql_real_escape_string($silver);
+	$copper = mysql_real_escape_string($copper);
+	$fresh_gold = mysql_real_escape_string($fresh_gold);
+	$fresh_silver = mysql_real_escape_string($fresh_silver);
+	$fresh_copper = mysql_real_escape_string($fresh_copper);
 	
 	
-	$sql = "UPDATE contest SET title = '$title', start_time = '$starttime', end_time = '$endtime', pre_start_time = '$pre_starttime', pre_end_time = '$pre_endtime', private = '$private', pre = '$pre', pre_problem_sum = '$pre_contest', problem_sum = '$contest' , fresh = '$fresh' WHERE contest_id = 0";
+	$sql = "UPDATE contest SET title = '$title', start_time = '$starttime', end_time = '$endtime', pre_start_time = '$pre_starttime', pre_end_time = '$pre_endtime', private = '$private', pre = '$pre', pre_problem_sum = '$pre_contest', problem_sum = '$contest' , fresh = '$fresh', gold = '$gold', silver = '$silver', copper = '$copper', fresh_gold = '$fresh_gold', fresh_silver = '$fresh_silver', fresh_copper = '$fresh_copper' WHERE contest_id = 0";
 	//echo $sql;
 	mysql_query($sql) or die(mysql_error());
 	mysql_query("TRUNCATE TABLE schoolcontest_problem");	
@@ -137,6 +155,11 @@ if($fresh){
 	else
 		echo "红紫黄粉蓝橘绿白";?>" >
 	<br>
+	奖牌设置:<br>【老生组】金<input class=input-mini type=text size=2 name=gold onBlur="if (value ==''){value='<?echo $_SESSION['C'] -> getGold()?>'}" onClick="if(this.value!='')this.value=''" value="<?echo $_SESSION['C'] -> getGold()?>">
+	银<input class=input-mini type=text size=2 name=silver onBlur="if (value ==''){value='<?echo $_SESSION['C'] -> getSilver()?>'}" onClick="if(this.value!='')this.value=''" value="<?echo $_SESSION['C'] -> getSilver()?>">铜<input class=input-mini type=text size=2 name=copper onBlur="if (value ==''){value='<?echo $_SESSION['C'] -> getCopper()?>'}" onClick="if(this.value!='')this.value=''" value="<?echo $_SESSION['C'] -> getCopper()?>">
+	<br>
+	【新生组】金<input class=input-mini type=text size=2 name=f_gold onBlur="if (value ==''){value='<?echo $_SESSION['C'] -> getF_gold()?>'}" onClick="if(this.value!='')this.value=''" value="<?echo $_SESSION['C'] -> getF_gold()?>">
+	银<input class=input-mini type=text size=2 name=f_silver onBlur="if (value ==''){value='<?echo $_SESSION['C'] -> getF_silver()?>'}" onClick="if(this.value!='')this.value=''" value="<?echo $_SESSION['C'] -> getF_silver()?>">铜<input class=input-mini type=text size=2 name=f_copper onBlur="if (value ==''){value='<?echo $_SESSION['C'] -> getF_copper()?>'}" onClick="if(this.value!='')this.value=''" value="<?echo $_SESSION['C'] -> getF_copper()?>">
 	<br/>
 	<p><input type=submit value=Submit name=submit><input type=reset value=Reset name=reset></p>
 	</form>

@@ -14,7 +14,12 @@ class Contest{
 	private $pri;
 	private $problem_max;
 	private $balloon;
-
+	private $gold;
+	private $silver;
+	private $copper;
+	private $fresh_gold;
+	private $fresh_silver;
+	private $fresh_copper;
 	
 	public function __construct($c_id, $title, $s_t, $e_t, $p_s_t, $p_e_t, $defunct, $pre, $fresh, $p_s, $p_p_s, $pri){
 		$this -> contest_id = $c_id;
@@ -29,17 +34,6 @@ class Contest{
 		$this -> problem_sum = $p_s;
 		$this -> pre_problem_sum = $p_p_s;
 		$this -> pri = $pri;
-		$sql = "SELECT MAX(problem_id) FROM problem";
-		$result = mysql_query($sql);
-		$row = mysql_fetch_array($result);
-		$this -> problem_max = $row[0];
-		$sql = "SELECT `color` FROM  `balloon`";
-		$result = mysql_query($sql);
-		$i = 0;
-		while($row = mysql_fetch_array($result)){
-			$this -> balloon[$i] = $row[color];
-			$i++;			
-		}
 	}
 	
 	public function getC_id(){
@@ -139,6 +133,10 @@ class Contest{
 	}
 	
 	public function getP_max(){
+		$sql = "SELECT MAX(problem_id) FROM problem";
+		$result = mysql_query($sql);
+		$row = mysql_fetch_array($result);
+		$this -> problem_max = $row[0];
 		return $this -> problem_max;
 	}
 	
@@ -147,8 +145,65 @@ class Contest{
 	}
 	
 	public function getBal(){
+		$sql = "SELECT `color` FROM  `balloon`";
+		$result = mysql_query($sql);
+		$i = 0;
+		while($row = mysql_fetch_array($result)){
+			$this -> balloon[$i] = $row[color];
+			$i++;			
+		}
 		return $this -> balloon;
 	}
+	
+	public function getGold(){
+		$sql = "SELECT `gold` FROM contest WHERE contest_id = 0";
+		$result = mysql_query($sql);
+		$row = mysql_fetch_array($result);
+		$this -> gold = $row['gold'];
+		return $this -> gold;
+	}
+	
+	public function getSilver(){
+		$sql = "SELECT `silver` FROM contest WHERE contest_id = 0";
+		$result = mysql_query($sql);
+		$row = mysql_fetch_array($result);
+		$this -> silver = $row['silver'];
+		return $this -> silver;
+	}
+	
+	public function getCopper(){
+		$sql = "SELECT `copper` FROM contest WHERE contest_id = 0";
+		$result = mysql_query($sql);
+		$row = mysql_fetch_array($result);
+		$this -> copper = $row['copper'];
+		return $this -> copper;
+	}
+	
+	public function getF_gold(){
+		$sql = "SELECT `fresh_gold` FROM contest WHERE contest_id = 0";
+		$result = mysql_query($sql);
+		$row = mysql_fetch_array($result);
+		$this -> fresh_gold = $row['fresh_gold'];
+		return $this -> fresh_gold;
+	}
+	
+	public function getF_silver(){
+		$sql = "SELECT `fresh_silver` FROM contest WHERE contest_id = 0";
+		$result = mysql_query($sql);
+		$row = mysql_fetch_array($result);
+		$this -> fresh_silver = $row['fresh_silver'];
+		return $this -> fresh_silver;
+	}
+	
+	public function getF_copper(){
+		$sql = "SELECT `fresh_copper` FROM contest WHERE contest_id = 0";
+		$result = mysql_query($sql);
+		$row = mysql_fetch_array($result);
+		$this -> fresh_copper = $row['fresh_copper'];
+		return $this -> fresh_copper;
+	}
+
 }
+
 
 ?>
