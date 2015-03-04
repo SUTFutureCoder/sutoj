@@ -8,10 +8,31 @@
 
 ---
 
-数据库连接在**paike1.5/include/conn.php**第32行。
+数据库连接在**sutoj/include/db_info.inc.php**第6行。
 
 ---
 ###DEMO 示例
 
-####主界面
-![主界面](https://github.com/SUTFutureCoder/paike1.5/blob/master/example-img/paike_01.png?raw=true)
+####登录界面
+![登录界面](https://github.com/SUTFutureCoder/sutoj/blob/master/example-img/sutoj_01.png?raw=true)
+
+####答题界面
+![答题界面](https://github.com/SUTFutureCoder/sutoj/blob/master/example-img/sutoj_02.png?raw=true)
+
+####一键设定比赛
+![一键设定比赛](https://github.com/SUTFutureCoder/sutoj/blob/master/example-img/sutoj_03.png?raw=true)
+
+####登录作弊监视
+内网开展比赛，如发现外网IP则有作弊嫌疑
+![登录作弊监视](https://github.com/SUTFutureCoder/sutoj/blob/master/example-img/sutoj_04.png?raw=true)
+
+####抄袭作弊监视
+即使仅修改变量也无法瞒过反作弊系统的眼睛，虽然机器筛查有误判率，但抄袭作弊监视解决了误判的问题。
+![抄袭作弊监视](https://github.com/SUTFutureCoder/sutoj/blob/master/example-img/sutoj_05.png?raw=true)
+
+####批量设置密码
+重置密码后自动导出Excel表格以打印
+![批量设置密码](https://github.com/SUTFutureCoder/sutoj/blob/master/example-img/sutoj_06.png?raw=true)
+
+####参赛队员专业分布情况
+![参赛队员专业分布情况](https://github.com/SUTFutureCoder/sutoj/blob/master/example-img/sutoj_07.png?raw=true)

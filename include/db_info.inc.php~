@@ -3,7 +3,7 @@
 static 	$DB_HOST="localhost";
 static 	$DB_NAME="jol";
 static 	$DB_USER="root";
-static 	$DB_PASS="";
+static 	$DB_PASS="000000";
 $conn = @mysql_connect($DB_HOST,$DB_USER,$DB_PASS) or die ("error");
 mysql_query("SET NAMES UTF8");
 mysql_select_db($DB_NAME, $conn) or die ("error");
